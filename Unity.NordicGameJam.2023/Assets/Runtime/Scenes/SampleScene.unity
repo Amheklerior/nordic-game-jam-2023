@@ -301,3 +301,166 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1743154517
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1743154519}
+  - component: {fileID: 1743154518}
+  m_Layer: 0
+  m_Name: TestGameController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1743154518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743154517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ca556456aaa49b8ba5e0a7d8ad9f19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartNewGame:
+    m_Name: Start New Game
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 23672041-7900-44f7-833b-7bdfaa80580a
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 9f55b8ba-8887-4904-97ce-a4fbfda44ba1
+      m_Path: <Keyboard>/enter
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Start New Game
+      m_Flags: 0
+    m_Flags: 0
+  Pause:
+    m_Name: Pause
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 98eec6df-1780-4e60-be3d-878f5f31ab38
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 7af79856-dc69-43b6-aca7-47c30e1400bc
+      m_Path: <Keyboard>/p
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Pause
+      m_Flags: 0
+    m_Flags: 0
+  Resume:
+    m_Name: Resume
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: d34de165-b46c-47e1-b212-78280f1aaa43
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: f465e9af-c32e-4fd4-9d8b-dad187f52ec0
+      m_Path: <Keyboard>/r
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Resume
+      m_Flags: 0
+    m_Flags: 0
+  GameOver:
+    m_Name: Game Over
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a05fd2a3-2ffa-4d05-8647-61bda43d4255
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 61830611-7849-42ea-b4a0-e6033193f797
+      m_Path: <Keyboard>/o
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Game Over
+      m_Flags: 0
+    m_Flags: 0
+  Win:
+    m_Name: Win
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: cccd7c57-443f-401a-a928-39729561ec54
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 5773950b-9c09-410f-88b8-f3f6be36a8ce
+      m_Path: <Keyboard>/w
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Win
+      m_Flags: 0
+    m_Flags: 0
+  Quit:
+    m_Name: Quit
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: b41815bb-34bb-496f-b624-5f22a8e20183
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 98278804-4b4e-4de3-ad47-5cbae3190fac
+      m_Path: <Keyboard>/q
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Quit
+      m_Flags: 0
+    m_Flags: 0
+  Exit:
+    m_Name: Exit
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: df1e10b9-8c35-4c5d-b9fc-59d1c6782c05
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: cabb50c7-fd38-46f5-89ba-bf19ccd0d559
+      m_Path: <Keyboard>/escape
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Exit
+      m_Flags: 0
+    m_Flags: 0
+--- !u!4 &1743154519
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743154517}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
