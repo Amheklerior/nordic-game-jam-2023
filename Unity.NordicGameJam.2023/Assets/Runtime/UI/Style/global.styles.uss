@@ -1,0 +1,80 @@
+#main-panel {
+    align-items: center;
+    justify-content: center;
+}
+
+#center-column {
+    justify-content: center;
+    align-items: stretch;
+    height: 100%;
+    width: 40%;
+    min-width: 300px;
+    max-width: 1200px;
+}
+
+#page-title {
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    min-height: 120px;
+}
+
+#menu {
+    align-items: center;
+}
+
+.overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.59);
+    align-items: center;
+    justify-content: center;
+}
+
+.panel {
+    flex-grow: 1;
+}
+
+.menu-button {
+    background-color: unset;
+    border-color: unset;
+    margin: 4px;
+    padding: 0;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out-back;
+}
+
+.menu-button:hover {
+    scale: 1.2;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out-back;
+    letter-spacing: 18px;
+}
+
+.menu-button:active {
+    scale: 1.1;
+    transition-duration: 0.1s;
+    letter-spacing: 14px;
+}
+
+.menu-button > Label {
+    -unity-text-align: middle-center;
+}
+
+Label {
+    -unity-text-align: middle-left;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+
+.primaryCTA {
+    font-size: 20px;
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
