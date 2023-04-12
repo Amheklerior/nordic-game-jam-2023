@@ -379,6 +379,145 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1188976157
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1188976159}
+  - component: {fileID: 1188976158}
+  m_Layer: 0
+  m_Name: 'TestGameController '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1188976158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188976157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ca556456aaa49b8ba5e0a7d8ad9f19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartNewGame:
+    m_Name: Start New Game
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 84607510-b534-4270-a52f-b2633fe97d39
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  Pause:
+    m_Name: Pause
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: c5e2a438-759b-4acd-9d76-1acfc52fc762
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 846d2c76-7116-4966-a4a3-542bc24746c3
+      m_Path: <Keyboard>/p
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Pause
+      m_Flags: 0
+    m_Flags: 0
+  Resume:
+    m_Name: Resume
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 573c7d40-b2d0-4bff-8b54-726c64fe22a9
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: a6e3a2ae-42b2-49f7-a13b-766dd60fec64
+      m_Path: <Keyboard>/r
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Resume
+      m_Flags: 0
+    m_Flags: 0
+  GameOver:
+    m_Name: Game Over
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: e8b1e474-3de4-4e94-a235-71014de0b17f
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 1b6ee9f0-89a6-4b13-9377-3071d621a0cf
+      m_Path: <Keyboard>/f
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Game Over
+      m_Flags: 0
+    m_Flags: 0
+  Win:
+    m_Name: Win
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 26b3533d-dd09-44b1-8191-bea05178be4e
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 5eca9ca4-f703-4c96-a372-a300e4c6e946
+      m_Path: <Keyboard>/w
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Win
+      m_Flags: 0
+    m_Flags: 0
+  Quit:
+    m_Name: Quit
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a266acc3-cd8b-4383-bc81-a6c4f4feff8c
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  Exit:
+    m_Name: Exit
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 28f05398-556d-4427-b7bb-280bebfd5563
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+--- !u!4 &1188976159
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188976157}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1321645632
 GameObject:
   m_ObjectHideFlags: 0

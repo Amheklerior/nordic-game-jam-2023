@@ -1,9 +1,17 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
+// TODO: refactor:
+// Separate logic into separate components or at least encapsulate it into readable functions
 public class Controller : MonoBehaviour
 {
     private UIDocument _doc;
+
+    // Main screens
+    private VisualElement _mainMenuScreen;
+    private VisualElement _pauseMenuScreen;
+    private VisualElement _gameOverScreen;
+    private VisualElement _victoryScreen;
 
     // Main Menu Buttons
     private Button _playBtn;
@@ -25,29 +33,56 @@ public class Controller : MonoBehaviour
     private void Awake()
     {
         _doc = GetComponent<UIDocument>();
+        var root = _doc.rootVisualElement;
+        var game = Game.Instance;
+            
+        // Grab refs to the main screens 
+        _mainMenuScreen = root.Q<VisualElement>("GameMenuUI");
+        _pauseMenuScreen = root.Q<VisualElement>("PauseUI");
+        _gameOverScreen = root.Q<VisualElement>("GameOverUI");
+        _victoryScreen = root.Q<VisualElement>("WinUI");
 
         // grab refs to the ui buttons 
-        _playBtn = _doc.rootVisualElement.Q<Button>("play-btn");
-        _exitBtn = _doc.rootVisualElement.Q<Button>("exit-btn");
-        _resumeBtn = _doc.rootVisualElement.Q<Button>("resume-btn");
-        _restartBtn = _doc.rootVisualElement.Q<Button>("restart-btn");
-        _quitBtn = _doc.rootVisualElement.Q<Button>("quit-btn");
-        _tryAgainBtn = _doc.rootVisualElement.Q<Button>("try-again-btn");
-        _quitAsLooserBtn = _doc.rootVisualElement.Q<Button>("quit-as-looser-btn");
-        _playAgainBtn = _doc.rootVisualElement.Q<Button>("play-again-btn");
-        _quitAsWinnerBtn = _doc.rootVisualElement.Q<Button>("quit-as-winner-btn");
+        _playBtn = root.Q<Button>("play-btn");
+        _exitBtn = root.Q<Button>("exit-btn");
+        _resumeBtn = root.Q<Button>("resume-btn");
+        _restartBtn = root.Q<Button>("restart-btn");
+        _quitBtn = root.Q<Button>("quit-btn");
+        _tryAgainBtn = root.Q<Button>("try-again-btn");
+        _quitAsLooserBtn = root.Q<Button>("quit-as-looser-btn");
+        _playAgainBtn = root.Q<Button>("play-again-btn");
+        _quitAsWinnerBtn = root.Q<Button>("quit-as-winner-btn");
 
         // wire the buttons' interaction logic
-        _playBtn.clicked += () => Debug.Log("PLAY");
-        _exitBtn.clicked += () => Debug.Log("EXIT");
-        _resumeBtn.clicked += () => Debug.Log("RESUME");
-        _restartBtn.clicked += () => Debug.Log("RESTART");
-        _quitBtn.clicked += () => Debug.Log("QUIT");
-        _tryAgainBtn.clicked += () => Debug.Log("TRY AGAIN");
-        _quitAsLooserBtn.clicked += () => Debug.Log("QUIT AS A LOSER");
-        _playAgainBtn.clicked += () => Debug.Log("PLAY AGAIN");
-        _quitAsWinnerBtn.clicked += () => Debug.Log("QUIT AS A WINNER");
+        _playBtn.clicked += () => game.StartGame();
+        _exitBtn.clicked += () => game.Exit();
+        _resumeBtn.clicked += () => game.Resume();
+        _restartBtn.clicked += () => game.StartGame();
+        _quitBtn.clicked += () => game.Quit();
+        _tryAgainBtn.clicked += () => game.StartGame();
+        _quitAsLooserBtn.clicked += () => game.Quit();
+        _playAgainBtn.clicked += () => game.StartGame();
+        _quitAsWinnerBtn.clicked += () => game.Quit();
 
-    }
+        // Integrate to react to game state changes
+        game.onGameStart += () =>
+        {
+            _mainMenuScreen.visible = false;
+            _pauseMenuScreen.visible = false;
+            _gameOverScreen.visible = false;
+            _victoryScreen.visible = false;
+        };
+        game.onPause += () => _pauseMenuScreen.visible = true;
+        game.onResume += () => _pauseMenuScreen.visible = false;
+        game.onGameOver += () => _gameOverScreen.visible = true;
+        game.onGameWinning += () => _victoryScreen.visible = true;
+        game.onGameQuit += () =>
+        {
+            _pauseMenuScreen.visible = false;
+            _gameOverScreen.visible = false;
+            _victoryScreen.visible = false;
+            _mainMenuScreen.visible = true;
+        };
+    }        
 
 }

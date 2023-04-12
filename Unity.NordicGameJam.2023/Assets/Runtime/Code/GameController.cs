@@ -16,7 +16,7 @@ public class GameController: MonoBehaviour
 
     private void Awake()
     {
-        _game = new Game();
+        _game = Game.Instance;
 
         StartNewGame.performed += ctx => _game.StartGame();
         Pause.performed += ctx => _game.Pause();
