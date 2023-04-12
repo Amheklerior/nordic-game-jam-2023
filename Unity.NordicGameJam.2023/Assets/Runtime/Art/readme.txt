@@ -1,0 +1,1 @@
+Put in here all your art assets, such as icons, textures, sprites, materials, models, etc.

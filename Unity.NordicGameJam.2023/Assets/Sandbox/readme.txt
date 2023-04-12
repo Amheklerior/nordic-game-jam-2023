@@ -1,0 +1,1 @@
+Use this folder as your playground field, in which you can run experiments. In a team scenario, evaluate creating a folder with your name inside it.
