@@ -1,59 +1,73 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-// TODO: refactor:
-// Separate logic into separate components or at least encapsulate it into readable functions
 public class Controller : MonoBehaviour
 {
+
+    private void Awake()
+    {
+        GeUIElementRefs();
+
+        var game = Game.Instance;
+        WireInteractionLogicToUIElements(game);
+        WireReactionToGameStateChanges(game);
+    }
+
+    #region UI Element Refs
+
     private UIDocument _doc;
 
-    // Main screens
+    // Main Menu Screen
     private VisualElement _mainMenuScreen;
-    private VisualElement _pauseMenuScreen;
-    private VisualElement _gameOverScreen;
-    private VisualElement _victoryScreen;
-
-    // Main Menu Buttons
     private Button _playBtn;
     private Button _exitBtn;
 
-    // Pause Screen Buttons 
+    // Pause Menu Screen
+    private VisualElement _pauseMenuScreen;
     private Button _resumeBtn;
     private Button _restartBtn;
     private Button _quitBtn;
 
-    // Game Over Screen Buttons
+    // Game Over Screen
+    private VisualElement _gameOverScreen;
     private Button _tryAgainBtn;
     private Button _quitAsLooserBtn;
 
-    // Winning Screen Buttons
+    // Victory Screen
+    private VisualElement _victoryScreen;
     private Button _playAgainBtn;
     private Button _quitAsWinnerBtn;
 
-    private void Awake()
+
+    private void GeUIElementRefs()
     {
         _doc = GetComponent<UIDocument>();
         var root = _doc.rootVisualElement;
-        var game = Game.Instance;
-            
-        // Grab refs to the main screens 
-        _mainMenuScreen = root.Q<VisualElement>("GameMenuUI");
-        _pauseMenuScreen = root.Q<VisualElement>("PauseUI");
-        _gameOverScreen = root.Q<VisualElement>("GameOverUI");
-        _victoryScreen = root.Q<VisualElement>("WinUI");
 
-        // grab refs to the ui buttons 
+        _mainMenuScreen = root.Q<VisualElement>("GameMenuUI");
         _playBtn = root.Q<Button>("play-btn");
         _exitBtn = root.Q<Button>("exit-btn");
+
+        _pauseMenuScreen = root.Q<VisualElement>("PauseUI");
         _resumeBtn = root.Q<Button>("resume-btn");
         _restartBtn = root.Q<Button>("restart-btn");
         _quitBtn = root.Q<Button>("quit-btn");
+
+        _gameOverScreen = root.Q<VisualElement>("GameOverUI");
         _tryAgainBtn = root.Q<Button>("try-again-btn");
         _quitAsLooserBtn = root.Q<Button>("quit-as-looser-btn");
+
+        _victoryScreen = root.Q<VisualElement>("WinUI");
         _playAgainBtn = root.Q<Button>("play-again-btn");
         _quitAsWinnerBtn = root.Q<Button>("quit-as-winner-btn");
+    }
 
-        // wire the buttons' interaction logic
+    #endregion
+
+    #region UI Interactions
+
+    private void WireInteractionLogicToUIElements(Game game)
+    {
         _playBtn.clicked += () => game.StartGame();
         _exitBtn.clicked += () => game.Exit();
         _resumeBtn.clicked += () => game.Resume();
@@ -63,26 +77,51 @@ public class Controller : MonoBehaviour
         _quitAsLooserBtn.clicked += () => game.Quit();
         _playAgainBtn.clicked += () => game.StartGame();
         _quitAsWinnerBtn.clicked += () => game.Quit();
+    }
 
-        // Integrate to react to game state changes
-        game.onGameStart += () =>
-        {
-            _mainMenuScreen.visible = false;
-            _pauseMenuScreen.visible = false;
-            _gameOverScreen.visible = false;
-            _victoryScreen.visible = false;
-        };
-        game.onPause += () => _pauseMenuScreen.visible = true;
-        game.onResume += () => _pauseMenuScreen.visible = false;
-        game.onGameOver += () => _gameOverScreen.visible = true;
-        game.onGameWinning += () => _victoryScreen.visible = true;
+    #endregion
+
+    #region Reactions To State Changes
+
+    private void WireReactionToGameStateChanges(Game game)
+    {
+        game.onGameStart += () => HideCurrentScreen();
+        game.onPause += () => Show(_pauseMenuScreen);
+        game.onResume += () => HideCurrentScreen();
+        game.onGameOver += () => Show(_gameOverScreen);
+        game.onGameWinning += () => Show(_victoryScreen);
         game.onGameQuit += () =>
         {
-            _pauseMenuScreen.visible = false;
-            _gameOverScreen.visible = false;
-            _victoryScreen.visible = false;
-            _mainMenuScreen.visible = true;
+            HideCurrentScreen();
+            Show(_mainMenuScreen);
         };
-    }        
+    }
+
+    #endregion
+
+    #region UI Controls
+
+    private VisualElement _currentScreen = null;
+
+    private bool NoCurrentScreen => _currentScreen == null;
+
+    private void Show(VisualElement ui)
+    {
+        ui.visible = true;
+        _currentScreen = ui;
+    }
+
+    private void Hide(VisualElement ui)
+    {
+        ui.visible = false;
+        _currentScreen = null;
+    }
+
+    private void HideCurrentScreen() {
+        if (NoCurrentScreen) return;
+        Hide(_currentScreen);
+    }
+
+    #endregion
 
 }
