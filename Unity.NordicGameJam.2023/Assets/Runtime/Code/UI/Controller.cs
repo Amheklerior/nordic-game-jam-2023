@@ -7,8 +7,8 @@ public class Controller : MonoBehaviour
     private void Awake()
     {
         GeUIElementRefs();
-
-        var game = Game.Instance;
+        
+        var game = GameController.Instance;
         WireInteractionLogicToUIElements(game);
         WireReactionToGameStateChanges(game);
     }
@@ -60,13 +60,15 @@ public class Controller : MonoBehaviour
         _victoryScreen = root.Q<VisualElement>("WinUI");
         _playAgainBtn = root.Q<Button>("play-again-btn");
         _quitAsWinnerBtn = root.Q<Button>("quit-as-winner-btn");
+
+        _currentScreen = _mainMenuScreen;
     }
 
     #endregion
 
     #region UI Interactions
 
-    private void WireInteractionLogicToUIElements(Game game)
+    private void WireInteractionLogicToUIElements(GameController game)
     {
         _playBtn.clicked += () => game.StartGame();
         _exitBtn.clicked += () => game.Exit();
@@ -83,7 +85,7 @@ public class Controller : MonoBehaviour
 
     #region Reactions To State Changes
 
-    private void WireReactionToGameStateChanges(Game game)
+    private void WireReactionToGameStateChanges(GameController game)
     {
         game.onGameStart += () => HideCurrentScreen();
         game.onPause += () => Show(_pauseMenuScreen);

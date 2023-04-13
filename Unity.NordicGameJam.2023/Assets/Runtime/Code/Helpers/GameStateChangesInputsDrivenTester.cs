@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// TODO: Delete. This is just a helper class for a quick manual test
-public class GameController: MonoBehaviour
+public class GameStateChangesInputsDrivenTester: MonoBehaviour
 {
     public InputAction StartNewGame;
     public InputAction Pause;
@@ -12,11 +11,11 @@ public class GameController: MonoBehaviour
     public InputAction Quit;
     public InputAction Exit;
 
-    private Game _game;
+    private GameController _game;
 
     private void Awake()
     {
-        _game = Game.Instance;
+        _game = GameController.Instance;
 
         StartNewGame.performed += ctx => _game.StartGame();
         Pause.performed += ctx => _game.Pause();

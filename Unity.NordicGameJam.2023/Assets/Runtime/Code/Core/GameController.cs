@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Game
+public class GameController
 {
 
     #region Game States and transitions
@@ -92,9 +92,9 @@ public class Game
 
     #region Singleton
 
-    private static Game _instance;
+    private static GameController _instance;
 
-    public static Game Instance => _instance ?? (_instance = new Game());
+    public static GameController Instance => _instance ??= new GameController();
 
     #endregion
 
