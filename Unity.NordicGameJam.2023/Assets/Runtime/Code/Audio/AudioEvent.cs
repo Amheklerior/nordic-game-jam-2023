@@ -1,28 +1,32 @@
 using UnityEngine;
+using Amheklerior.NordicGameJam2023.Utils;
 
-[CreateAssetMenu(menuName = "Audio/Event")]
-public class AudioEvent : ScriptableObject
+namespace Amheklerior.NordicGameJam2023.Audio
 {
-    [SerializeField] AudioClip[] clips;
-
-    [SerializeField] FloatRange volume;
-
-    [MinMaxRange(0, 2)]
-    [SerializeField] FloatRange pitch;
-
-    public void Play(AudioSource source)
+    [CreateAssetMenu(menuName = "Audio/Event")]
+    public class AudioEvent : ScriptableObject
     {
-        if (clips.Length == 0) return;
+        [SerializeField] AudioClip[] clips;
 
-        source.clip = RandomAudioClip;
-        source.volume = volume.Random;
-        source.pitch = pitch.Random;
-        source.Play();
+        [SerializeField] FloatRange volume;
+
+        [MinMaxRange(0, 2)]
+        [SerializeField] FloatRange pitch;
+
+        public void Play(AudioSource source)
+        {
+            if (clips.Length == 0) return;
+
+            source.clip = RandomAudioClip;
+            source.volume = volume.Random;
+            source.pitch = pitch.Random;
+            source.Play();
+        }
+
+        #region Internals
+
+        private AudioClip RandomAudioClip => clips[Random.Range(0, clips.Length)];
+
+        #endregion
     }
-
-    #region Internals
-
-    private AudioClip RandomAudioClip => clips[Random.Range(0, clips.Length)];
-
-    #endregion
 }
