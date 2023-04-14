@@ -9,6 +9,7 @@ namespace NordicGameJam2023.Utils
         Action<T> OnPut { get; set; }
         T Get();
         void Put(T instance);
+        bool HasMore();
     }
 
     internal class Pool<T> : AbstractPool<T>
