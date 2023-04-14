@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class Worm : MonoBehaviour
+public class Worm : MonoBehaviour, IFeedable
 {
     public AnimationCurve FeedToVelocityCurve;
     public float BaseVelocity;
@@ -30,15 +30,18 @@ public class Worm : MonoBehaviour
         currentFeed = Mathf.Clamp(currentFeed, 0.0f, MaxFeed);
     }
 
-    public void ProvideFeed(float amount)
+    public void ConsumeResource(Resource res)
     {
-        currentFeed += amount;
+        currentFeed += res.FoodAmount;
         currentFeed = Mathf.Clamp(currentFeed, 0.0f, MaxFeed);
+        Destroy(res.gameObject);
     }
+
 
     [Button]
     public void TestFeed()
     {
-        ProvideFeed(1.0f);
+        currentFeed += 1.0f;
+        currentFeed = Mathf.Clamp(currentFeed, 0.0f, MaxFeed);
     }
 }
