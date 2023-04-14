@@ -43,6 +43,8 @@ namespace NordicGameJam2023.Utils
 
         public void Put(GameObject instance) => _objectPool.Put(instance);
 
+        public bool HasMore() => _objectPool.HasMore();
+
 
         #region Unity lifecycle
 
@@ -54,9 +56,8 @@ namespace NordicGameJam2023.Utils
                 throw new NullReferenceException();
             }
             _transform = transform;
+            InitializePool();
         }
-
-        private void Start() => InitializePool();
 
         #endregion
 
@@ -93,7 +94,7 @@ namespace NordicGameJam2023.Utils
 
         private void InitializePool()
         {
-            var pool = GetPoolImplementation();
+            _objectPool = GetPoolImplementation();
             if (_automanageObjectActivation)
             {
                 _objectPool.OnGet += (GameObject instance) => instance.SetActive(true);

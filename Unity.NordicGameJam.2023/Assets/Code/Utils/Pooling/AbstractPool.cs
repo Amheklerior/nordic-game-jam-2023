@@ -19,6 +19,8 @@ namespace NordicGameJam2023.Utils
             Fill(capacity);
         }
 
+        public bool HasMore() => !IsEmpty;
+
         public T Get()
         {
             if (IsEmpty && _canExpand) Expand();
