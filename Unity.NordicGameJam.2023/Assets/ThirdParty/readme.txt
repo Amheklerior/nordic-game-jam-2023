@@ -1,1 +1,0 @@
-Put all third party libraries and assets in here.

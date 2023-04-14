@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEditor;
-using Amheklerior.NordicGameJam2023.Utils;
+using NordicGameJam2023.Utils;
 
 [CustomPropertyDrawer(typeof(FloatRange), true)]
 public class FloatRangeDrawer : PropertyDrawer

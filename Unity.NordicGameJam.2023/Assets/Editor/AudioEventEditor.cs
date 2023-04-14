@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEditor;
-using Amheklerior.NordicGameJam2023.Audio;
+using NordicGameJam2023.Audio;
 
 [CustomEditor(typeof(AudioEvent), true)]
 public class AudioEventEditor : Editor
