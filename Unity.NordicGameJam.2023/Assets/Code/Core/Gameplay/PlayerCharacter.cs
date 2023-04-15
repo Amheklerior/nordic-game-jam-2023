@@ -6,14 +6,19 @@ using Random = UnityEngine.Random;
 
 public class PlayerCharacter : MonoBehaviour, IFeedable
 {
-    private Rigidbody2D _rigidbody;
     public Transform ResourceHolder;
-
-    private Vector2 movementInput;
-    public float MaxVelocity;
-
     public List<Resource> CollectedResources;
 
+    [Header("Movement")]    
+    public float MaxVelocity;
+    [Space] 
+    public AnimationCurve ForceAcceleration;
+    
+    private Vector2 movementInput;
+    private Rigidbody2D _rigidbody;
+
+    private float _currentVelocity => MaxVelocity;
+    
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -58,7 +63,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     
     private void FixedUpdate()
     {
-        _rigidbody.velocity = movementInput * MaxVelocity;
+        _rigidbody.AddForce(movementInput * _currentVelocity, ForceMode2D.Force);
     }
 
     private void Update()
