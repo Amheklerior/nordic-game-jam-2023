@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -48,6 +47,12 @@ public class TeamManager : MonoBehaviour
             Team1.Remove(player);
         else if (Team2.Contains(player))
             Team2.Remove(player);
+    }
+
+    private void ResetTeams()
+    {
+        Team1.Clear();
+        Team2.Clear();
     }
 
 }

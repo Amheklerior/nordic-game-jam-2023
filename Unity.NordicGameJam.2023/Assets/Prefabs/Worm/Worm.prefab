@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -6229847302243344484}
   - component: {fileID: 5787834473765810604}
   - component: {fileID: 2793793409403903991}
+  - component: {fileID: -751347658112083355}
   m_Layer: 6
   m_Name: Worm
   m_TagString: Untagged
@@ -100,6 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fb77925f8556dd499720df22403c569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WormTeam: {fileID: 0}
   FeedToVelocityCurve:
     serializedVersion: 2
     m_Curve:
@@ -264,3 +266,18 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 2.36, y: 1}
   m_Direction: 1
+--- !u!114 &-751347658112083355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675478495058653426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1073ec90fead9594b85d965cacd0975b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _offSet: {x: 0, y: -0.25}
+  _shadowMaterial: {fileID: 2100000, guid: 5b5d2ee530ba60745b1db441029888f5, type: 2}
+  casterRenderer: {fileID: 6087728467143699267}

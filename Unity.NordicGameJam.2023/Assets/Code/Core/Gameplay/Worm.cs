@@ -7,6 +7,8 @@ using Random = UnityEngine.Random;
 
 public class Worm : MonoBehaviour, IFeedable
 {
+    public TeamDefinitions WormTeam;
+    [Space]
     public AnimationCurve FeedToVelocityCurve;
     public float BaseVelocity;
 

@@ -36,6 +36,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     public SpriteRenderer SecondarySprite;
 
     [Space] public TrailRenderer Trail;
+    public ParticleSystem PushEffect;
 
     private Vector2 movementInput;
     private Rigidbody2D _rigidbody;
@@ -65,7 +66,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
         Cam = Camera.main;
         _rigidbody = GetComponent<Rigidbody2D>();
         _teamManager = FindObjectOfType<TeamManager>();
-        SetupInput();
+        //SetupInput(); // It is not working.. the input is successfully disabled at start, but it daoes not get enebled  
     }
 
     private void Start()
@@ -117,16 +118,16 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
         CollectedResources.Add(resource);
         resource.IsTaken = true;
         resource.transform.SetParent(ResourceHolder);
-        resource.transform.localPosition = Random.insideUnitCircle;
+        resource.transform.localPosition = Random.insideUnitCircle * 1.25f;
     }
 
     public void ConsumeResource(Resource res)
     {
         CollectedResources.Remove(res);
-        Destroy(res.gameObject);
+        res.onConsume();
 
         //Temp consumption effect add more later
-        speedModifier += .2f;
+        speedModifier += .5f;
     }
 
     private void FixedUpdate()
@@ -199,23 +200,35 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
             AccelerationTimer = 0;
     }
 
-    public void Push(Vector2 dir, float force) =>
+    public void Push(Vector2 dir, float force)
+    {
         _rigidbody.AddForce(dir.normalized * force, ForceMode2D.Impulse);
+        PushEffect.Play();
+        CameraShake.Instance.StartShake(.2f, 1f);
+    }
+
 
     public void ProvideFeed(float amount) { }
+
+    private bool CanDash() => CollectedResources.Count != 0;
 
     #region Actions
 
     public void OnMovement(InputValue value) =>
         movementInput = value.Get<Vector2>();
 
+
     public void OnDash(InputValue value)
     {
-        if (DashTimer != 0) return;
+        if (DashTimer != 0 || !CanDash()) return;
 
         _rigidbody.AddForce(movementInput * DashForce, ForceMode2D.Impulse);
         DashTimer = DashCooldown;
         AttackTimer = ActivationTimer;
+
+        var res = CollectedResources[0];
+        CollectedResources.Remove(res);
+        Destroy(res.gameObject);
     }
 
     public void OnConsume(InputValue value)
@@ -233,6 +246,8 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     {
         _teamManager.AddPlayer(this);
         UpdatePlayerVisuals();
+
+        transform.position = Random.insideUnitCircle * 8f;
     }
 
     #endregion
