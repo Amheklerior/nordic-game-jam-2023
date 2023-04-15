@@ -258,6 +258,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  RewindOffset: 1.05
   DashForce: 15
   DashCooldown: 1
   MainSprite: {fileID: 5168862394315276874}

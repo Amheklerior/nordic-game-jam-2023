@@ -18,6 +18,8 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     [Space] public float AccelerationTime;
     public AnimationCurve ForceAcceleration;
 
+    [Space, Min(1f)] public float RewindOffset;
+    
     [Space]
     public float DashForce = 15f;
 
@@ -68,7 +70,6 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
             CollectedResources.Clear();
         }
     }
-
     
     private void TakeResource(Resource resource)
     {
@@ -92,10 +93,33 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     {
         ResourceHolder.rotation = Quaternion.Euler(0.0f, 0.0f, Time.time * 360.0f);
 
+        Rewind();
+        
         AccelerationTiming();
         DashTiming();
     }
 
+    private void Rewind()
+    {
+        var aspect = (float)Screen.width / Screen.height;
+ 
+        var worldHeight = Camera.main.orthographicSize * 2;
+        var worldWidth = worldHeight * aspect;
+
+        worldHeight *= RewindOffset;
+        worldWidth *= RewindOffset;
+        
+        if (transform.position.x >= worldWidth / 2)
+            transform.position -= new Vector3(worldWidth, 0);
+        else if (transform.position.x <= -worldWidth / 2)
+            transform.position += new Vector3(worldWidth, 0);
+
+        if (transform.position.y >= worldHeight / 2)
+            transform.position -= new Vector3(0, worldHeight);
+        else if (transform.position.y <= -worldHeight / 2)
+            transform.position += new Vector3(0, worldHeight);
+    }
+    
     private void DashTiming()
     {
         if (DashTimer != 0)
