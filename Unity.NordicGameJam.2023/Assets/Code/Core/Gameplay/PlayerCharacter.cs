@@ -117,7 +117,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
         CollectedResources.Add(resource);
         resource.IsTaken = true;
         resource.transform.SetParent(ResourceHolder);
-        resource.transform.localPosition = Random.insideUnitCircle;
+        resource.transform.localPosition = Random.insideUnitCircle * 1.25f;
     }
 
     public void ConsumeResource(Resource res)
@@ -126,7 +126,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
         Destroy(res.gameObject);
 
         //Temp consumption effect add more later
-        speedModifier += .2f;
+        speedModifier += .5f;
     }
 
     private void FixedUpdate()
@@ -204,18 +204,25 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
 
     public void ProvideFeed(float amount) { }
 
+    private bool CanDash() => CollectedResources.Count != 0;
+
     #region Actions
 
     public void OnMovement(InputValue value) =>
         movementInput = value.Get<Vector2>();
 
+    
     public void OnDash(InputValue value)
     {
-        if (DashTimer != 0) return;
-
+        if (DashTimer != 0 || !CanDash()) return;
+        
         _rigidbody.AddForce(movementInput * DashForce, ForceMode2D.Impulse);
         DashTimer = DashCooldown;
         AttackTimer = ActivationTimer;
+        
+        var res = CollectedResources[0];
+        CollectedResources.Remove(res);
+        Destroy(res.gameObject);
     }
 
     public void OnConsume(InputValue value)
@@ -228,7 +235,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     #endregion
 
     #region Joing / Leave
-
+    
     private void OnJoin()
     {
         _teamManager.AddPlayer(this);

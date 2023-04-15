@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 895024189594882185}
   - component: {fileID: 3685696391365537518}
   - component: {fileID: 6042277962075746896}
-  m_Layer: 0
+  - component: {fileID: -6841994156612967055}
+  m_Layer: 10
   m_Name: WormNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,3 +196,18 @@ DistanceJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 1
   m_MaxDistanceOnly: 0
+--- !u!114 &-6841994156612967055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3805877181159045881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1073ec90fead9594b85d965cacd0975b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _offSet: {x: 0, y: -0.25}
+  _shadowMaterial: {fileID: 2100000, guid: 5b5d2ee530ba60745b1db441029888f5, type: 2}
+  casterRenderer: {fileID: 7133506977824425867}
