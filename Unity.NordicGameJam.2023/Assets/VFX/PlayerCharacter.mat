@@ -58,13 +58,13 @@ Material:
     m_Ints: []
     m_Floats:
     - _EnableExternalAlpha: 0
-    - _Multiplier: 0.24
+    - _Multiplier: 0.4
     - _SineMul: 0.1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Velocity: {r: 5.37, g: 0, b: 0, a: 0}
+    - _Velocity: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6195780477703517838
 MonoBehaviour:

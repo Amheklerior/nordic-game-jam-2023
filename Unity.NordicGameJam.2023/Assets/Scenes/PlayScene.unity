@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731704, g: 0.1341472, b: 0.121078566, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1026,58 +1026,22 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.45973969
-      value: 7.7673144
-      inSlope: 0.09245562
-      outSlope: 0.09245562
-      tangentMode: 0
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.68900204
+      outWeight: 0
     - serializedVersion: 3
-      time: 7.4742613
-      value: 3.971788
-      inSlope: -1.1167481
-      outSlope: -1.1167481
-      tangentMode: 0
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
       weightedMode: 0
-      inWeight: 0.11971875
-      outWeight: 0.2927841
-    - serializedVersion: 3
-      time: 11.166438
-      value: 4.355753
-      inSlope: 2.995199
-      outSlope: 2.995199
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.120584354
-      outWeight: 0.07536468
-    - serializedVersion: 3
-      time: 16.802128
-      value: 4.7251725
-      inSlope: -2.277956
-      outSlope: -2.277956
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.012177533
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 23.506424
-      value: 4.3553405
-      inSlope: 1.2524874
-      outSlope: 1.2524874
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.16069816
-      outWeight: 0.2552817
-    - serializedVersion: 3
-      time: 29.327248
-      value: 8.349133
-      inSlope: 0.013952436
-      outSlope: 0.013952436
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.5093865
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
