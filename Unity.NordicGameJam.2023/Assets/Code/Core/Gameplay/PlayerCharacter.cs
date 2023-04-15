@@ -66,7 +66,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
         Cam = Camera.main;
         _rigidbody = GetComponent<Rigidbody2D>();
         _teamManager = FindObjectOfType<TeamManager>();
-        SetupInput();
+        //SetupInput(); // It is not working.. the input is successfully disabled at start, but it daoes not get enebled  
     }
 
     private void Start()
@@ -124,7 +124,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     public void ConsumeResource(Resource res)
     {
         CollectedResources.Remove(res);
-        Destroy(res.gameObject);
+        res.onConsume();
 
         //Temp consumption effect add more later
         speedModifier += .5f;
@@ -206,7 +206,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
         PushEffect.Play();
         CameraShake.Instance.StartShake(.2f, 1f);
     }
-        
+
 
     public void ProvideFeed(float amount) { }
 
@@ -217,15 +217,15 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     public void OnMovement(InputValue value) =>
         movementInput = value.Get<Vector2>();
 
-    
+
     public void OnDash(InputValue value)
     {
         if (DashTimer != 0 || !CanDash()) return;
-        
+
         _rigidbody.AddForce(movementInput * DashForce, ForceMode2D.Impulse);
         DashTimer = DashCooldown;
         AttackTimer = ActivationTimer;
-        
+
         var res = CollectedResources[0];
         CollectedResources.Remove(res);
         Destroy(res.gameObject);
@@ -241,7 +241,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     #endregion
 
     #region Joing / Leave
-    
+
     private void OnJoin()
     {
         _teamManager.AddPlayer(this);
