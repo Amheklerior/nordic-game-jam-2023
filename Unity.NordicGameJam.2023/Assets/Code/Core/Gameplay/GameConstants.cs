@@ -6,5 +6,6 @@ public static class GameConstants
     public const int PLAYER_LAYER = 8;
 
     // Scenes
-    public const int GAMEPLAY_SCENE_ID = 2;
+    public const int MAIN_SCENE_ID = 0;
+    public const int GAMEPLAY_SCENE_ID = 1;
 }

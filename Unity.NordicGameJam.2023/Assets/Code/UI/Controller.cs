@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -35,6 +36,10 @@ public class Controller : MonoBehaviour
     private Button _playAgainBtn;
     private Button _quitMatchBtn;
 
+    // Cowntdown Screen
+    private VisualElement _countdownScreen;
+    private Label _counterLabel;
+
 
     private void GeUIElementRefs()
     {
@@ -55,6 +60,9 @@ public class Controller : MonoBehaviour
         _winningTeamLabel = root.Q<Label>("team-label");
         _playAgainBtn = root.Q<Button>("play-again-btn");
         _quitMatchBtn = root.Q<Button>("quit-match-btn");
+
+        _countdownScreen = root.Q<VisualElement>("CountdownUI");
+        _counterLabel = root.Q<Label>("counter");
 
         _currentScreen = _mainMenuScreen;
     }
@@ -84,7 +92,12 @@ public class Controller : MonoBehaviour
             HideCurrentScreen();
             Show(_waitingRoom);
         };
-        game.onMatchStart += () => HideCurrentScreen();
+        game.onMatchReady += () =>
+        {
+            HideCurrentScreen();
+            Show(_countdownScreen);
+            StartCoroutine(Countdown());
+        };
         game.onPause += () => Show(_pauseMenuScreen);
         game.onResume += () => HideCurrentScreen();
         game.onMatchEnd += (winningTeam) =>
@@ -97,6 +110,21 @@ public class Controller : MonoBehaviour
             HideCurrentScreen();
             Show(_mainMenuScreen);
         };
+    }
+
+    private IEnumerator Countdown()
+    {
+        var counter = new string[] { "3", "2", "1" };
+        foreach (var count in counter)
+        {
+            _counterLabel.text = count;
+            yield return new WaitForSeconds(1f);
+        }
+        GameController.Instance.StartMatch();
+        _counterLabel.text = "Go!";
+        yield return new WaitForSeconds(2f);
+        _counterLabel.text = "";
+        HideCurrentScreen();
     }
 
     #endregion

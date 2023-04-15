@@ -73,6 +73,8 @@ Label {
     margin: 0;
     padding: 0;
     font-size: 16px;
+    transition-duration: 0.4s;
+    transition-timing-function: ease-out-elastic;
 }
 
 .primaryCTA {

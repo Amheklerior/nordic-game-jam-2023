@@ -1,9 +1,7 @@
 using System;
-using UnityEngine.SceneManagement;
 
 public class GameController
 {
-
     #region Game States and transitions
 
     public enum GameState
@@ -20,10 +18,11 @@ public class GameController
     public void StartGame()
     {
         if (State != GameState.MAIN_MENU) return;
-        SceneManager.LoadScene(GameConstants.GAMEPLAY_SCENE_ID, LoadSceneMode.Additive);
         onGameStart?.Invoke();
         State = GameState.WITING_FOR_PLAYERS;
     }
+
+    public void GetReady() => onMatchReady?.Invoke();
 
     public void StartMatch()
     {
@@ -56,8 +55,6 @@ public class GameController
     public void Restart()
     {
         if (State != GameState.MATCH_COMPLETED) return;
-        SceneManager.UnloadScene(GameConstants.GAMEPLAY_SCENE_ID);
-        SceneManager.LoadScene(GameConstants.GAMEPLAY_SCENE_ID, LoadSceneMode.Additive);
         onMatchStart?.Invoke();
         State = GameState.PLAYING;
     }
@@ -65,7 +62,6 @@ public class GameController
     public void Quit()
     {
         if (State != GameState.PAUSED && State != GameState.MATCH_COMPLETED) return;
-        SceneManager.UnloadScene(GameConstants.GAMEPLAY_SCENE_ID);
         onGameQuit?.Invoke();
         State = GameState.MAIN_MENU;
     }
@@ -86,6 +82,7 @@ public class GameController
     #region Game Events
 
     public Action onGameStart;
+    public Action onMatchReady;
     public Action onMatchStart;
     public Action onPause;
     public Action onResume;
