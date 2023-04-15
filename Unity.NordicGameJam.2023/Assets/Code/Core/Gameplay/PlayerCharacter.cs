@@ -38,7 +38,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     [Space] public TrailRenderer Trail;
     public ParticleSystem PushEffect;
 
-    private Vector2 movementInput;
+    [ShowInInspector] private Vector2 movementInput;
     private Rigidbody2D _rigidbody;
 
     #region Stats

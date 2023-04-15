@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7133506977824425867}
   - component: {fileID: 8233140212923373380}
   - component: {fileID: 3685696391365537518}
+  - component: {fileID: 412462563452552572}
   m_Layer: 0
   m_Name: WormNode
   m_TagString: Untagged
@@ -148,3 +149,18 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.91, y: 0.64}
   m_Direction: 1
+--- !u!114 &412462563452552572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3805877181159045881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1073ec90fead9594b85d965cacd0975b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _offSet: {x: 0, y: -0.25}
+  _shadowMaterial: {fileID: 2100000, guid: 5b5d2ee530ba60745b1db441029888f5, type: 2}
+  casterRenderer: {fileID: 7133506977824425867}

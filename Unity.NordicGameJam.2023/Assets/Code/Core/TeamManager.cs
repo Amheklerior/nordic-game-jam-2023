@@ -12,18 +12,7 @@ public class TeamManager : MonoBehaviour
     private List<PlayerCharacter> Team1 = new();
     private List<PlayerCharacter> Team2 = new();
 
-    private PlayerInputManager _inputManager;
-
     private bool IsMatchMakingComplete => Team1.Count == Team2.Count && Team1.Count == playersPerTeam;
-
-    #region Unity Methods
-
-    private void Awake()
-    {
-        _inputManager = FindObjectOfType<PlayerInputManager>();
-    }
-
-    #endregion
 
     public void AddPlayer(PlayerCharacter player)
     {

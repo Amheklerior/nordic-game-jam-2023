@@ -215,7 +215,7 @@ MonoBehaviour:
     m_ActionName: Gameplay/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: 
+  m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!58 &1286754894014189321
@@ -337,6 +337,7 @@ MonoBehaviour:
   MainSprite: {fileID: 5168862394315276874}
   SecondarySprite: {fileID: 2148921914696398755}
   Trail: {fileID: 6395228301948648250}
+  PushEffect: {fileID: 0}
 --- !u!1 &1373518750456202518
 GameObject:
   m_ObjectHideFlags: 0
