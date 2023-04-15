@@ -246,6 +246,8 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     {
         _teamManager.AddPlayer(this);
         UpdatePlayerVisuals();
+
+        transform.position = Random.insideUnitCircle * 8f;
     }
 
     #endregion

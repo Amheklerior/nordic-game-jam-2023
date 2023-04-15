@@ -37,5 +37,4 @@ public class ScenesManager : MonoBehaviour
     }
 
     private void SetActiveScene(int sceneId) => SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(sceneId));
-
 }
