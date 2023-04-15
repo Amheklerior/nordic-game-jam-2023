@@ -1,11 +1,11 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="GameMenuUI" src="project://database/Assets/Runtime/UI/Structure/GameMenuUI.uxml?fileID=9197481963319205126&amp;guid=276f24ed6070d4276a1f1bf908c64a01&amp;type=3#GameMenuUI" />
-    <ui:Template name="PauseUI" src="project://database/Assets/Runtime/UI/Structure/PauseUI.uxml?fileID=9197481963319205126&amp;guid=f5c2561e9bc514b91919afea68625513&amp;type=3#PauseUI" />
-    <ui:Template name="GameOverUI" src="project://database/Assets/Runtime/UI/Structure/GameOverUI.uxml?fileID=9197481963319205126&amp;guid=2dea04c734af84ea180b53fd4f8b33eb&amp;type=3#GameOverUI" />
-    <ui:Template name="WinUI" src="project://database/Assets/Runtime/UI/Structure/WinUI.uxml?fileID=9197481963319205126&amp;guid=e57422d879df24d72a3e9bb4a4e27219&amp;type=3#WinUI" />
-    <Style src="project://database/Assets/Runtime/UI/Style/global.styles.uss?fileID=7433441132597879392&amp;guid=5fc64ed79cd704cfeb569ba8e03ab2c6&amp;type=3#global.styles" />
+    <ui:Template name="GameMenuUI" src="project://database/Assets/UI/Structure/GameMenuUI.uxml?fileID=9197481963319205126&amp;guid=276f24ed6070d4276a1f1bf908c64a01&amp;type=3#GameMenuUI" />
+    <ui:Template name="PauseUI" src="project://database/Assets/UI/Structure/PauseUI.uxml?fileID=9197481963319205126&amp;guid=f5c2561e9bc514b91919afea68625513&amp;type=3#PauseUI" />
+    <ui:Template name="GameOverUI" src="project://database/Assets/UI/Structure/WaitingForPlayersUI.uxml?fileID=9197481963319205126&amp;guid=2dea04c734af84ea180b53fd4f8b33eb&amp;type=3#WaitingForPlayersUI" />
+    <ui:Template name="WinUI" src="project://database/Assets/UI/Structure/EndMatchUI.uxml?fileID=9197481963319205126&amp;guid=e57422d879df24d72a3e9bb4a4e27219&amp;type=3#EndMatchUI" />
+    <Style src="project://database/Assets/UI/Style/global.styles.uss?fileID=7433441132597879392&amp;guid=5fc64ed79cd704cfeb569ba8e03ab2c6&amp;type=3#global.styles" />
     <ui:Instance template="GameMenuUI" name="GameMenuUI" class="overlay" style="visibility: visible;" />
     <ui:Instance template="PauseUI" name="PauseUI" class="overlay" style="visibility: hidden;" />
-    <ui:Instance template="GameOverUI" name="GameOverUI" class="overlay" style="visibility: hidden;" />
-    <ui:Instance template="WinUI" name="WinUI" class="overlay" style="visibility: hidden;" />
+    <ui:Instance template="WinUI" name="VictoryUI" class="overlay" style="visibility: hidden;" />
+    <ui:Instance template="GameOverUI" name="WaitingRoomUI" class="overlay" style="visibility: hidden;" />
 </ui:UXML>
