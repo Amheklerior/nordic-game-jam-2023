@@ -37,7 +37,6 @@ public class Worm : MonoBehaviour, IFeedable
         Destroy(res.gameObject);
     }
 
-
     [Button]
     public void TestFeed()
     {

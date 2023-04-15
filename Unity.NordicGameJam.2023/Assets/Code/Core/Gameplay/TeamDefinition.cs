@@ -12,4 +12,5 @@ public class TeamDefinitions : ScriptableObject
     public Team Team;
     public Color PrimaryColor;
     public Color SecondaryColor;
+    public Gradient TrailColor;
 }

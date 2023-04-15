@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TeamManager : MonoBehaviour
 {
@@ -8,6 +10,17 @@ public class TeamManager : MonoBehaviour
     
     private List<PlayerCharacter> Team1 = new();
     private List<PlayerCharacter> Team2 = new();
+
+    private PlayerInputManager _inputManager;
+
+    #region Unity Methods
+
+    private void Awake()
+    {
+        _inputManager = FindObjectOfType<PlayerInputManager>();
+    }
+
+    #endregion
     
     public void AddPlayer(PlayerCharacter player)
     {
