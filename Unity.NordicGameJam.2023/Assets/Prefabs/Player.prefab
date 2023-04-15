@@ -5228,6 +5228,7 @@ MonoBehaviour:
   MainSprite: {fileID: 5168862394315276874}
   SecondarySprite: {fileID: 2148921914696398755}
   Trail: {fileID: 6395228301948648250}
+  TrailParticles: {fileID: 2489516096784270544}
   PushEffect: {fileID: 5177939001803857509}
   AttackEffect: {fileID: 1673776658973476069}
   ArrowPivot: {fileID: 4671196797773338192}

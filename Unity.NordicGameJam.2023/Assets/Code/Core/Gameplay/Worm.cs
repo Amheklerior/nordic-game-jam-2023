@@ -132,6 +132,7 @@ public class Worm : MonoBehaviour, IFeedable, IAttackable
 
     public void OnAttacked()
     {
+        currentFeed *= .5f;
         Debug.LogWarning("A WORM HAS BEEN ATTACKED IN LEGO CITY!");
     }
 

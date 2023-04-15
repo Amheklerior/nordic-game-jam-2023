@@ -43,7 +43,7 @@ public class ResourcesManager : MonoBehaviour
         var resourceObj = _pool.Get();
         resourceObj.transform.position = RandomPosition();
         var rot = Random.rotation;
-        rot = Quaternion.Euler(0, 0, rot.z);
+        rot = Quaternion.Euler(0, 0, rot.z * 360f);
         resourceObj.transform.rotation = rot;
         resourceObj.GetComponent<Resource>().onConsume += () =>
         {
