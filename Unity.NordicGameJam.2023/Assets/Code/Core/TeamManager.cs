@@ -5,13 +5,17 @@ using UnityEngine.InputSystem;
 
 public class TeamManager : MonoBehaviour
 {
+    public int playersPerTeam = 2;
+
     public TeamDefinitions Team1Definitions;
     [Space] public TeamDefinitions Team2Definitions;
-    
+
     private List<PlayerCharacter> Team1 = new();
     private List<PlayerCharacter> Team2 = new();
 
     private PlayerInputManager _inputManager;
+
+    private bool IsMatchMakingComplete => Team1.Count == Team2.Count && Team1.Count == playersPerTeam;
 
     #region Unity Methods
 
@@ -21,7 +25,7 @@ public class TeamManager : MonoBehaviour
     }
 
     #endregion
-    
+
     public void AddPlayer(PlayerCharacter player)
     {
         if (Team1.Count <= Team2.Count)
@@ -34,6 +38,8 @@ public class TeamManager : MonoBehaviour
             Team2.Add(player);
             player.PlayerTeam = Team2Definitions;
         }
+
+        if (IsMatchMakingComplete) GameController.Instance.GetReady();
     }
 
     public void RemovePlayer(PlayerCharacter player)
@@ -43,4 +49,5 @@ public class TeamManager : MonoBehaviour
         else if (Team2.Contains(player))
             Team2.Remove(player);
     }
+
 }

@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Style/global.styles.uss?fileID=7433441132597879392&amp;guid=5fc64ed79cd704cfeb569ba8e03ab2c6&amp;type=3#global.styles" />
+    <ui:VisualElement name="panel" style="flex-grow: 1; align-items: center; justify-content: center;">
+        <ui:Label tabindex="-1" text="Label" display-tooltip-when-elided="true" name="counter" style="align-self: center; font-size: 28px;" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Random = UnityEngine.Random;
 using Sirenix.OdinInspector;
 
 public class PlayerCharacter : MonoBehaviour, IFeedable
@@ -13,14 +11,14 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     public Transform ResourceHolder;
     public List<Resource> CollectedResources;
 
-    [Header("Movement")]    
+    [Header("Movement")]
     public float MaxVelocity;
 
     [Space] public float AccelerationTime;
     public AnimationCurve ForceAcceleration;
 
     [Space, Min(1f)] public float RewindOffset;
-    
+
     [Space]
     public float DashForce = 15f;
 
@@ -30,7 +28,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     public float PushForce;
 
     public float ActivationTimer;
-    
+
     [Header("Visuals")]
     //Temp Team Visuals Change this later I guess
     public SpriteRenderer MainSprite;
@@ -38,7 +36,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     public SpriteRenderer SecondarySprite;
 
     [Space] public TrailRenderer Trail;
-    
+
     private Vector2 movementInput;
     private Rigidbody2D _rigidbody;
 
@@ -51,21 +49,23 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     private float AttackTimer;
     private float DashTimer;
     private float AccelerationTimer;
-    
+
     private Camera Cam;
 
     private PlayerCharacter _lastAttack;
-    
-    [ShowInInspector] private float _currentVelocity => 
+
+    [ShowInInspector]
+    private float _currentVelocity =>
         (MaxVelocity + speedModifier) * ForceAcceleration.Evaluate(AccelerationTimer / AccelerationTime);
 
     private TeamManager _teamManager;
-    
+
     private void Awake()
     {
         Cam = Camera.main;
         _rigidbody = GetComponent<Rigidbody2D>();
         _teamManager = FindObjectOfType<TeamManager>();
+        SetupInput();
     }
 
     private void Start()
@@ -83,7 +83,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
                 TakeResource(re);
             }
         }
-        
+
         if (col.gameObject.layer == GameConstants.WORM_LAYER)
         {
             var worm = col.gameObject.GetComponent<Worm>();
@@ -91,17 +91,17 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
             {
                 worm.ConsumeResource(res);
             }
-            
+
             CollectedResources.Clear();
         }
 
         if (col.gameObject.layer == GameConstants.PLAYER_LAYER && AttackTimer != 0f)
         {
             var player = col.gameObject.GetComponent<PlayerCharacter>();
-            
-            if(_lastAttack == player) return;
+
+            if (_lastAttack == player) return;
             _lastAttack = player;
-            
+
             player.Push(_rigidbody.velocity, PushForce);
         }
     }
@@ -124,11 +124,11 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     {
         CollectedResources.Remove(res);
         Destroy(res.gameObject);
-        
+
         //Temp consumption effect add more later
         speedModifier += .2f;
     }
-    
+
     private void FixedUpdate()
     {
         _rigidbody.AddForce(movementInput * _currentVelocity, ForceMode2D.Force);
@@ -139,17 +139,17 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
         ResourceHolder.rotation = Quaternion.Euler(0.0f, 0.0f, Time.time * 360.0f);
 
         Rewind();
-        
+
         AccelerationTiming();
         DashTiming();
-        
-        AttackTimer= Mathf.Clamp(AttackTimer - Time.deltaTime, 0, ActivationTimer);
+
+        AttackTimer = Mathf.Clamp(AttackTimer - Time.deltaTime, 0, ActivationTimer);
     }
 
     private void Rewind()
     {
         var aspect = (float)Screen.width / Screen.height;
- 
+
         var worldHeight = Cam.orthographicSize * 2;
         var worldWidth = worldHeight * aspect;
 
@@ -159,9 +159,9 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
         void ClearTrail()
         {
             Trail.Clear();
-            Trail.SetPositions(new Vector3[] {Vector3.zero});
+            Trail.SetPositions(new Vector3[] { Vector3.zero });
         }
-        
+
         if (transform.position.x >= worldWidth / 2)
         {
             transform.position -= new Vector3(worldWidth, 0);
@@ -184,7 +184,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
             ClearTrail();
         }
     }
-    
+
     private void DashTiming()
     {
         if (DashTimer != 0)
@@ -201,7 +201,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
 
     public void Push(Vector2 dir, float force) =>
         _rigidbody.AddForce(dir.normalized * force, ForceMode2D.Impulse);
-    
+
     public void ProvideFeed(float amount) { }
 
     #region Actions
@@ -212,7 +212,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     public void OnDash(InputValue value)
     {
         if (DashTimer != 0) return;
-        
+
         _rigidbody.AddForce(movementInput * DashForce, ForceMode2D.Impulse);
         DashTimer = DashCooldown;
         AttackTimer = ActivationTimer;
@@ -221,14 +221,14 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     public void OnConsume(InputValue value)
     {
         Debug.LogWarning("CONSUME!");
-        if(CollectedResources.Count == 0) return;
+        if (CollectedResources.Count == 0) return;
         ConsumeResource(CollectedResources[0]);
     }
 
     #endregion
 
     #region Joing / Leave
-    
+
     private void OnJoin()
     {
         _teamManager.AddPlayer(this);
@@ -243,4 +243,20 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
         SecondarySprite.color = PlayerTeam.SecondaryColor;
         Trail.colorGradient = PlayerTeam.TrailColor;
     }
+
+    #region Input Management
+
+    private PlayerInput _inputHandler;
+
+    private void SetupInput()
+    {
+        _inputHandler = GetComponent<PlayerInput>();
+        _inputHandler.DeactivateInput();
+
+        GameController.Instance.onMatchStart += () => _inputHandler.ActivateInput();
+        GameController.Instance.onMatchEnd += (_winningTeam) => _inputHandler.DeactivateInput();
+    }
+
+    #endregion
+
 }
