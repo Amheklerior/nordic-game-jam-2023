@@ -31,7 +31,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
     public float AttackViewRange = 3.25f;
 
     public float MaxAttackDistance = 2f;
-    
+
     [Space]
     public float PushForce;
 
@@ -49,10 +49,10 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
     public ParticleSystem PushEffect;
     public ParticleSystem AttackEffect;
     [Space] public Transform ArrowPivot;
-    
+
     private Vector2 movementInput;
     private Vector2 aimInput;
-    
+
     private Rigidbody2D _rigidbody;
 
     #region Stats
@@ -81,12 +81,20 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
         Cam = Camera.main;
         _rigidbody = GetComponent<Rigidbody2D>();
         _teamManager = FindObjectOfType<TeamManager>();
+
         renderers = GetComponentsInChildren<SpriteRenderer>().ToList();
+
+
+
         //SetupInput(); // It is not working.. the input is successfully disabled at start, but it daoes not get enebled  
     }
 
     private void Start()
     {
+        foreach (var rend in renderers)
+        {
+            ModifyVerticees(rend);
+        }
         OnJoin();
     }
 
@@ -151,14 +159,15 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
         {
             CollectedResources[i]?.onConsume();
         }
+
         CollectedResources.Clear();
     }
-    
+
     private void FixedUpdate()
     {
         _rigidbody.AddForce(movementInput * _currentVelocity, ForceMode2D.Force);
     }
-    
+
     private void Update()
     {
         ResourceHolder.rotation = Quaternion.Euler(0.0f, 0.0f, Time.time * 360.0f);
@@ -173,10 +182,10 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
             var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             form.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
         }
-        
+
         RotateTransform(AttackEffect.transform, aimInput);
         RotateTransform(ArrowPivot.transform, aimInput);
-        
+
         AttackTimer = Mathf.Clamp(AttackTimer - Time.deltaTime, 0, ActivationTimer);
 
         foreach (var rend in renderers)
@@ -265,30 +274,30 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
 
     public void OnAttack()
     {
-        if(aimInput == Vector2.zero || CollectedResources.Count == 0) return;
-        
+        if (aimInput == Vector2.zero || CollectedResources.Count == 0) return;
+
         AttackEffect.Play();
         var attacked = GetAttackedTargets();
 
         var res = CollectedResources[0];
         CollectedResources.Remove(res);
         res.onConsume();
-        
+
         Debug.LogWarning(attacked.Count);
     }
 
     public List<IAttackable> GetAttackedTargets()
     {
         var attacked = FindObjectsOfType<MonoBehaviour>().OfType<IAttackable>();
-        var targets = new List<IAttackable>();
+        var targets  = new List<IAttackable>();
 
         foreach (var target in attacked)
         {
             if (target == this) continue;
             var dot = Vector2.Dot(aimInput, transform.position - target.GetTransform().position);
-            if(dot <= AttackViewRange && Vector2.Distance(transform.position, target.GetTransform().position) <= MaxAttackDistance) targets.Add(target);
+            if (dot <= AttackViewRange && Vector2.Distance(transform.position, target.GetTransform().position) <= MaxAttackDistance) targets.Add(target);
         }
-         
+
         return targets;
     }
 
@@ -299,8 +308,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
         Debug.LogWarning($"{gameObject.name} HAS BEEN ATTACKED!");
     }
 
-    public Transform GetTransform() =>
-        transform;
+    public Transform GetTransform() => transform;
 
     public void OnDash(InputValue value)
     {
@@ -353,6 +361,48 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
         // _inputHandler.DeactivateInput();
         // GameController.Instance.onMatchStart += () => _inputHandler.ActivateInput();
         // GameController.Instance.onMatchEnd += (_winningTeam) => _inputHandler.DeactivateInput();
+    }
+
+
+    void ModifyVerticees(SpriteRenderer rend)
+    {
+        Vector2[] newVerticees = new Vector2[64];
+        ushort[]  indicees     = new ushort[62 * 3];
+        
+        
+        ushort lastBig   = 63;
+        ushort lastSmall = 3;
+        
+        ushort l1 = 0;
+        ushort l2 = 1;
+        ushort l3 = 2;
+        
+        for (int i = 0; i < 64; i++)
+        {
+            newVerticees[i] = new Vector2(Mathf.Sin(i / 64.0f * 2.0f * Mathf.PI) + 1.0f, Mathf.Cos(i / 64.0f * 2.0f * Mathf.PI) + 1.0f) * 128.0f;
+        }
+        
+        for (int i = 0; i < 62; i++)
+        {
+            indicees[i * 3] = l1;
+            indicees[i * 3 + 1] = l2;
+            indicees[i * 3 + 2] = l3;
+        
+            if (i % 2 == 0)
+            {
+                l2 = l1;
+                l1 = lastBig;
+                lastBig--;
+            }
+            else
+            {
+                l2 = l3;
+                l3 = lastSmall;
+                lastSmall++;
+            }
+        }
+
+        rend.sprite.OverrideGeometry(newVerticees, indicees);
     }
 
     #endregion
