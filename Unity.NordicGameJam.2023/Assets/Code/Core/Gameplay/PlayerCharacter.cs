@@ -2,11 +2,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
+using Sirenix.OdinInspector;
 
 public class PlayerCharacter : MonoBehaviour, IFeedable
 {
     [field: SerializeField] public TeamDefinitions PlayerTeam;
-    [Space]
+
+    [Header("Resources")]
     public Transform ResourceHolder;
     public List<Resource> CollectedResources;
 
@@ -33,7 +35,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     private float DashTimer;
     private float AccelerationTimer;
     
-    private float _currentVelocity => 
+    [ShowInInspector] private float _currentVelocity => 
         MaxVelocity * ForceAcceleration.Evaluate(AccelerationTimer / AccelerationTime);
 
     private TeamManager _teamManager;
