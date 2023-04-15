@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector.Editor.Internal;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
@@ -11,13 +12,16 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
 
     [Header("Movement")]    
     public float MaxVelocity;
-    [Space] 
+
+    [Space] public float AccelerationTime;
     public AnimationCurve ForceAcceleration;
     
     private Vector2 movementInput;
     private Rigidbody2D _rigidbody;
 
-    private float _currentVelocity => MaxVelocity;
+    private float AccelerationTimer;
+    private float _currentVelocity => 
+        MaxVelocity * ForceAcceleration.Evaluate(AccelerationTimer / AccelerationTime);
     
     private void Awake()
     {
@@ -69,6 +73,11 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     private void Update()
     {
         ResourceHolder.rotation = Quaternion.Euler(0.0f, 0.0f, Time.time * 360.0f);
+
+        if (movementInput != Vector2.zero && AccelerationTimer <= AccelerationTime)
+            AccelerationTimer = Mathf.Clamp(AccelerationTimer + Time.deltaTime, 0, AccelerationTime);
+        else
+            AccelerationTimer = 0;
     }
 
     public void ProvideFeed(float amount) { }
