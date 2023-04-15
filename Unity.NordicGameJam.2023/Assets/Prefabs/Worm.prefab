@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PrefabBodyNode: {fileID: 895024189594882185, guid: c0ea69d6db6eae541936a6f2ea2c15d0, type: 3}
-  RootHigne: {fileID: 9217979120742562467}
+  RootRigidbody: {fileID: -6229847302243344484}
   NodesToCreate: 8
 --- !u!50 &-6229847302243344484
 Rigidbody2D:
