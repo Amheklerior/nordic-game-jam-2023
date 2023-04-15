@@ -279,6 +279,8 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
         AttackEffect.Play();
         var attacked = GetAttackedTargets();
 
+        attacked.ForEach(x => x.OnAttacked());
+        
         var res = CollectedResources[0];
         CollectedResources.Remove(res);
         res.onConsume();
@@ -349,6 +351,15 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
         MainSprite.color = PlayerTeam.PrimaryColor;
         SecondarySprite.color = PlayerTeam.SecondaryColor;
         Trail.colorGradient = PlayerTeam.TrailColor;
+
+        void SetColor(ParticleSystem system, Color color)
+        {
+            var main = system.main;
+            main.startColor = color;
+        }
+        
+        SetColor(AttackEffect, PlayerTeam.PrimaryColor);
+        SetColor(TrailParticles, PlayerTeam.SecondaryColor);
     }
 
     #region Input Management

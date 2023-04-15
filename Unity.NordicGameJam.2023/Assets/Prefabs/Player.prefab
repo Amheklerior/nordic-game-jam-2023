@@ -4992,7 +4992,7 @@ Transform:
   - {fileID: 379206700318634676}
   - {fileID: 4671196797773338192}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5168862394315276874
 SpriteRenderer:
@@ -5035,7 +5035,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -2413806693520163455, guid: 92f75474b1fd0f44dbcc4f052020e271, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0.5254902, g: 0.73333335, b: 0.84705883, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5228,7 +5228,7 @@ MonoBehaviour:
   MainSprite: {fileID: 5168862394315276874}
   SecondarySprite: {fileID: 2148921914696398755}
   Trail: {fileID: 6395228301948648250}
-  TrailParticles: {fileID: 0}
+  TrailParticles: {fileID: 2489516096784270544}
   PushEffect: {fileID: 5177939001803857509}
   AttackEffect: {fileID: 1673776658973476069}
   ArrowPivot: {fileID: 4671196797773338192}
@@ -20177,7 +20177,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: 92f75474b1fd0f44dbcc4f052020e271, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 0.2, g: 0.39607844, b: 0.5411765, a: 1}
   m_FlipX: 0
   m_FlipY: 0
