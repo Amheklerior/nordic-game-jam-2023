@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 7133506977824425867}
   - component: {fileID: 8233140212923373380}
   - component: {fileID: 895024189594882185}
-  - component: {fileID: 8874117660862912369}
+  - component: {fileID: 3685696391365537518}
+  - component: {fileID: 6042277962075746896}
   m_Layer: 0
   m_Name: WormNode
   m_TagString: Untagged
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9d92e74b0ae029c44937909d190dd39a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -128,19 +129,19 @@ HingeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_BreakAction: 3
-  m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -1.021, y: -0.032}
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 1.1, y: 0}
+  m_ConnectedAnchor: {x: -1.1, y: 0}
   m_UseMotor: 0
   m_Motor:
-    m_MotorSpeed: 0
-    m_MaximumMotorForce: 10000
+    m_MotorSpeed: 3
+    m_MaximumMotorForce: 1000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: -30
-    m_UpperAngle: 30
---- !u!58 &8874117660862912369
-CircleCollider2D:
+    m_LowerAngle: -10
+    m_UpperAngle: 10
+--- !u!70 &3685696391365537518
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -172,5 +173,25 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 1.91, y: 0.64}
+  m_Direction: 1
+--- !u!232 &6042277962075746896
+DistanceJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3805877181159045881}
+  m_Enabled: 0
+  serializedVersion: 4
+  m_EnableCollision: 1
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_BreakAction: 3
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 1, y: 0}
+  m_ConnectedAnchor: {x: -1, y: 0}
+  m_AutoConfigureDistance: 1
+  m_Distance: 1
+  m_MaxDistanceOnly: 0
