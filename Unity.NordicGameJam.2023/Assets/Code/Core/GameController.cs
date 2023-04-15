@@ -55,7 +55,7 @@ public class GameController
     public void Restart()
     {
         if (State != GameState.MATCH_COMPLETED) return;
-        onMatchStart?.Invoke();
+        onRestart?.Invoke();
         State = GameState.PLAYING;
     }
 
@@ -86,6 +86,7 @@ public class GameController
     public Action onMatchStart;
     public Action onPause;
     public Action onResume;
+    public Action onRestart;
     public Action<string> onMatchEnd;
     public Action onGameQuit;
     public Action onExit;

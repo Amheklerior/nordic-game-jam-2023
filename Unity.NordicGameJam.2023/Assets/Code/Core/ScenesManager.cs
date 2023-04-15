@@ -7,11 +7,16 @@ public class ScenesManager : MonoBehaviour
     private void Awake()
     {
         var game = GameController.Instance;
-        game.onGameStart += () => LoadGameScene();
+        game.onGameStart += LoadGameScene;
         game.onPause += () => SetActiveScene(GameConstants.MAIN_SCENE_ID);
         game.onResume += () => SetActiveScene(GameConstants.GAMEPLAY_SCENE_ID);
         game.onMatchEnd += (_) => SetActiveScene(GameConstants.MAIN_SCENE_ID);
-        game.onGameQuit += () => UnloadGameScene();
+        game.onRestart += () =>
+        {
+            UnloadGameScene();
+            LoadGameScene();
+        };
+        game.onGameQuit += UnloadGameScene;
     }
 
     private void LoadGameScene() => StartCoroutine(LoadGameSceneCoroutine());

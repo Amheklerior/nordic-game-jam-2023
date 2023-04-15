@@ -4,6 +4,8 @@ using UnityEngine.UIElements;
 
 public class Controller : MonoBehaviour
 {
+    public Camera uiCam;
+
     private void Awake()
     {
         GeUIElementRefs();
@@ -97,18 +99,27 @@ public class Controller : MonoBehaviour
             HideCurrentScreen();
             Show(_countdownScreen);
             StartCoroutine(Countdown());
+            uiCam.enabled = false;
         };
         game.onPause += () => Show(_pauseMenuScreen);
         game.onResume += () => HideCurrentScreen();
         game.onMatchEnd += (winningTeam) =>
         {
             _winningTeamLabel.text = winningTeam;
+            uiCam.enabled = true;
             Show(_victoryScreen);
         };
         game.onGameQuit += () =>
         {
             HideCurrentScreen();
             Show(_mainMenuScreen);
+        };
+        game.onRestart += () =>
+        {
+            HideCurrentScreen();
+            Show(_countdownScreen);
+            StartCoroutine(Countdown());
+            uiCam.enabled = false;
         };
     }
 

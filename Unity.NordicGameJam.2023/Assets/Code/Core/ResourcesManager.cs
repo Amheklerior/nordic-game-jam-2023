@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NordicGameJam2023.Utils;
@@ -14,10 +15,20 @@ public class ResourcesManager : MonoBehaviour
     [SerializeField]
     private float _spawnToSpawnInterval;
 
-    private void Start()
+    private void Start() => StartSpawning();
+
+    private void StartSpawning() => _spawner = StartCoroutine(SpawnResources());
+    private void StopSpawning() => StopCoroutine(_spawner);
+
+    private IEnumerator SpawnResources()
     {
         InitialSpawn();
-        InvokeRepeating("SpawnNewResource", _howLongToWaitBeforeSpawningNewOnes, _spawnToSpawnInterval);
+        yield return new WaitForSeconds(_howLongToWaitBeforeSpawningNewOnes);
+        while (true)
+        {
+            SpawnNewResource();
+            yield return new WaitForSeconds(_spawnToSpawnInterval);
+        }
     }
 
     private void InitialSpawn()
@@ -45,6 +56,7 @@ public class ResourcesManager : MonoBehaviour
     private GameObjectPool _pool;
     private Bounds _spawningArea;
     public List<Bounds> _occupiedAreas;
+    private Coroutine _spawner;
 
     private float RandomX => Random.Range(_spawningArea.center.x - _spawningArea.extents.x, _spawningArea.center.x + _spawningArea.extents.x);
     private float RandomY => Random.Range(_spawningArea.center.y - _spawningArea.extents.y, _spawningArea.center.y + _spawningArea.extents.y);
@@ -54,6 +66,7 @@ public class ResourcesManager : MonoBehaviour
         _pool = GetComponent<GameObjectPool>();
         _spawningArea = GetComponent<Collider2D>().bounds;
         _occupiedAreas = new List<Bounds>();
+        GameController.Instance.onMatchEnd += (_) => StopSpawning();
     }
 
     private Vector3 RandomPosition()

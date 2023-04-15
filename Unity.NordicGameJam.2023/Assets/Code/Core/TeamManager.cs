@@ -49,4 +49,10 @@ public class TeamManager : MonoBehaviour
             Team2.Remove(player);
     }
 
+    private void ResetTeams()
+    {
+        Team1.Clear();
+        Team2.Clear();
+    }
+
 }
