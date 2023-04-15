@@ -10,26 +10,26 @@ public class ResourcesManager : MonoBehaviour
     private int _howManyToSpawnAtStartup;
 
     [SerializeField]
-    private int _howLongToWaitBeforeSpawningNewOnes;
+    private AnimationCurve _spawnFrequency;
 
-    [SerializeField]
-    private float _spawnToSpawnInterval;
+    private Timer _timer;
 
     private void Start() => StartSpawning();
 
-    private void StartSpawning() => _spawner = StartCoroutine(SpawnResources());
-    private void StopSpawning() => StopCoroutine(_spawner);
+    private void Update() => _timer.Tick(Time.deltaTime);
 
-    private IEnumerator SpawnResources()
+    private void StartSpawning()
     {
         InitialSpawn();
-        yield return new WaitForSeconds(_howLongToWaitBeforeSpawningNewOnes);
-        while (true)
+        _timer = new Timer(SpawnRate, () =>
         {
             SpawnNewResource();
-            yield return new WaitForSeconds(_spawnToSpawnInterval);
-        }
+            _timer.Restart(SpawnRate);
+        });
+        _timer.Start();
     }
+
+    private void StopSpawning() => _timer.Stop();
 
     private void InitialSpawn()
     {
@@ -55,11 +55,11 @@ public class ResourcesManager : MonoBehaviour
 
     private GameObjectPool _pool;
     private Bounds _spawningArea;
-    public List<Bounds> _occupiedAreas;
-    private Coroutine _spawner;
+    private List<Bounds> _occupiedAreas;
 
     private float RandomX => Random.Range(_spawningArea.center.x - _spawningArea.extents.x, _spawningArea.center.x + _spawningArea.extents.x);
     private float RandomY => Random.Range(_spawningArea.center.y - _spawningArea.extents.y, _spawningArea.center.y + _spawningArea.extents.y);
+    private float SpawnRate => _spawnFrequency.Evaluate(GameController.Instance.DistanceFromTheFinishLine);
 
     private void Awake()
     {
@@ -92,5 +92,6 @@ public class ResourcesManager : MonoBehaviour
     }
 
     #endregion
+
 
 }

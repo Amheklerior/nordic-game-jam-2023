@@ -101,4 +101,17 @@ public class GameController
 
     #endregion
 
+    #region
+
+    private float distance = 9999f;
+    public float DistanceFromTheFinishLine
+    {
+        get => distance;
+        set
+        {
+            if (value <= distance) distance = value;
+        }
+    }
+
+    #endregion
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NordicGameJam2023.Utils 
+namespace NordicGameJam2023.Utils
 {
     public interface ITimer
     {
@@ -10,15 +10,18 @@ namespace NordicGameJam2023.Utils
         void Resume();
         void Stop();
         void Restart();
+        void Restart(float expiryTimeInSeconds);
     }
 
-    public class Timer : ITimer {
+    public class Timer : ITimer
+    {
 
         public float Current { get; private set; }
 
         public bool IsRunning { get; private set; }
 
-        public Timer(float? expiryTimeInSeconds = null, Action OnTimeExpired = null) {
+        public Timer(float? expiryTimeInSeconds = null, Action OnTimeExpired = null)
+        {
             if (expiryTimeInSeconds != null && expiryTimeInSeconds <= 0)
                 throw new ArgumentException($"The expiry time must be greater than zero. Was {expiryTimeInSeconds} instead.");
 
@@ -32,17 +35,27 @@ namespace NordicGameJam2023.Utils
 
         public void Resume() => IsRunning = true;
 
-        public void Stop() {
+        public void Stop()
+        {
             Current = 0;
             IsRunning = false;
         }
 
-        public void Restart() {
+        public void Restart()
+        {
             Current = 0;
             IsRunning = true;
         }
 
-        public void Tick(float elapsed) {
+        public void Restart(float expiryTimeInSeconds)
+        {
+            Current = 0;
+            _expiryTime = expiryTimeInSeconds;
+            IsRunning = true;
+        }
+
+        public void Tick(float elapsed)
+        {
             if (!IsRunning || Expired) return;
             Current += elapsed;
             if (Expired) _onTimeExpired?.Invoke();
@@ -51,7 +64,7 @@ namespace NordicGameJam2023.Utils
         #region Internals 
 
         private readonly Action _onTimeExpired;
-        private readonly float? _expiryTime;
+        private float? _expiryTime;
         private bool Expired => _expiryTime != null && Current >= _expiryTime;
 
         #endregion

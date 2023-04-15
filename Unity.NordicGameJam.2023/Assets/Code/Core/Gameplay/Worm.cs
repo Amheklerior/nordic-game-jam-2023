@@ -7,6 +7,8 @@ using Random = UnityEngine.Random;
 
 public class Worm : MonoBehaviour, IFeedable
 {
+    public Transform _finishLine;
+
     public TeamDefinitions WormTeam;
     [Space]
     public AnimationCurve FeedToVelocityCurve;
@@ -37,6 +39,8 @@ public class Worm : MonoBehaviour, IFeedable
     public int NodesToCreate;
     private const float TAIL_SPACING = 0.9f;
 
+    private float DistanceFromTarget => _finishLine.position.x - _transform.position.x;
+
     private void Awake()
     {
         startYPos = transform.position.y;
@@ -53,14 +57,14 @@ public class Worm : MonoBehaviour, IFeedable
 
     private void GenerateBody()
     {
-        var prevNode      = transform;
+        var prevNode = transform;
         var rotationAngle = 0.0f;
         for (int i = 0; i < NodesToCreate; i++)
         {
             rotationAngle += Random.Range(-10.0f, 10.0f);
             var rotation = Quaternion.Euler(0.0f, 0.0f, rotationAngle);
             var spawnPos = prevNode.transform.position + prevNode.rotation * Vector3.left * TAIL_SPACING + rotation * Vector3.left * TAIL_SPACING;
-            var node     = Instantiate(TailNodePrefab, spawnPos, rotation);
+            var node = Instantiate(TailNodePrefab, spawnPos, rotation);
 
             prevNode = node.transform;
             tail.Add(node);
@@ -81,19 +85,20 @@ public class Worm : MonoBehaviour, IFeedable
         currentFeed -= FeedConsumptionRate * Time.fixedDeltaTime;
         currentFeed = Mathf.Clamp(currentFeed, 0.0f, MaxFeed);
         UpdateTail();
+        GameController.Instance.DistanceFromTheFinishLine = DistanceFromTarget;
     }
 
     private void UpdateTail()
     {
-        var prevNode      = transform;
+        var prevNode = transform;
 
         for (int i = 0; i < tail.Count; i++)
         {
-            var node         = tail[i];
-            var targetPos    = prevNode.transform.position + prevNode.rotation * Vector3.left * 1.1f + node.transform.rotation * Vector3.left * 1.1f;
+            var node = tail[i];
+            var targetPos = prevNode.transform.position + prevNode.rotation * Vector3.left * 1.1f + node.transform.rotation * Vector3.left * 1.1f;
             var lookAtVector = prevNode.transform.position + prevNode.rotation * Vector3.left * 1.1f - node.transform.position;
-            var targetRot    = Quaternion.Euler(0.0f, 0.0f, Mathf.Atan2(lookAtVector.y, lookAtVector.x) * Mathf.Rad2Deg);
-            var currentRot   = Quaternion.Euler(0.0f, 0.0f, node.rotation);
+            var targetRot = Quaternion.Euler(0.0f, 0.0f, Mathf.Atan2(lookAtVector.y, lookAtVector.x) * Mathf.Rad2Deg);
+            var currentRot = Quaternion.Euler(0.0f, 0.0f, node.rotation);
 
             node.velocity = Vector3.zero;
             node.angularVelocity = 0.0f;
