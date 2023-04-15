@@ -28,7 +28,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     [Header("Visuals")]
     //Temp Team Visuals Change this later I guess
     public SpriteRenderer MainSprite;
-
+    [Space]
     public SpriteRenderer SecondarySprite;
     
     private Vector2 movementInput;
@@ -46,6 +46,11 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _teamManager = FindObjectOfType<TeamManager>();
+    }
+
+    private void Start()
+    {
+        OnJoin();
     }
 
     public void OnTriggerEnter2D(Collider2D col)
@@ -154,18 +159,10 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     #endregion
 
     #region Joing / Leave
-
-    public void OnPlayerJoined(PlayerInput playerInput)
-    {
-        Debug.Log(
-            $"Hello, World! Player: {playerInput.playerIndex}");
-        OnJoin();
-    }
-
+    
     private void OnJoin()
     {
         _teamManager.AddPlayer(this);
-        
         UpdatePlayerVisuals();
     }
 
