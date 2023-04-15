@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 7129316038173693260}
   - component: {fileID: 6087728467143699267}
   - component: {fileID: 3104410716444002996}
+  - component: {fileID: 2534458539359481818}
   - component: {fileID: -6229847302243344484}
   - component: {fileID: 5245662574105944227}
   - component: {fileID: 992882014729642517}
+  - component: {fileID: 9217979120742562467}
   m_Layer: 6
   m_Name: Worm
   m_TagString: Untagged
@@ -34,7 +36,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6087728467143699267
 SpriteRenderer:
@@ -145,6 +147,21 @@ MonoBehaviour:
   BaseVelocity: 2
   MaxFeed: 10
   FeedConsumptionRate: 0.5
+--- !u!114 &2534458539359481818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675478495058653426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3685976f3105a394b88baffd1851d189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PrefabBodyNode: {fileID: 895024189594882185, guid: c0ea69d6db6eae541936a6f2ea2c15d0, type: 3}
+  RootHigne: {fileID: 9217979120742562467}
+  NodesToCreate: 8
 --- !u!50 &-6229847302243344484
 Rigidbody2D:
   serializedVersion: 4
@@ -171,7 +188,7 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 0
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &5245662574105944227
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -262,3 +279,28 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!233 &9217979120742562467
+HingeJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675478495058653426}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 1
+  m_ConnectedRigidBody: {fileID: -6229847302243344484}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_BreakAction: 3
+  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_UseMotor: 0
+  m_Motor:
+    m_MotorSpeed: 0
+    m_MaximumMotorForce: 10000
+  m_UseLimits: 1
+  m_AngleLimits:
+    m_LowerAngle: -30
+    m_UpperAngle: 30
