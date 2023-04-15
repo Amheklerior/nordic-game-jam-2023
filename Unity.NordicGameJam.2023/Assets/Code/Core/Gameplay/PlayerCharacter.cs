@@ -36,6 +36,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     public SpriteRenderer SecondarySprite;
 
     [Space] public TrailRenderer Trail;
+    public ParticleSystem PushEffect;
 
     private Vector2 movementInput;
     private Rigidbody2D _rigidbody;
@@ -199,8 +200,13 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
             AccelerationTimer = 0;
     }
 
-    public void Push(Vector2 dir, float force) =>
+    public void Push(Vector2 dir, float force)
+    {
         _rigidbody.AddForce(dir.normalized * force, ForceMode2D.Impulse);
+        PushEffect.Play();
+        CameraShake.Instance.StartShake(.2f, 1f);
+    }
+        
 
     public void ProvideFeed(float amount) { }
 

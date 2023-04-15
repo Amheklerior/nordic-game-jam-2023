@@ -12,6 +12,8 @@ public class Goal : MonoBehaviour
         var worm = col.gameObject.GetComponent<Worm>();
         GoalHit?.Invoke(worm.WormTeam);
         _goalReached = true;
+        Debug.LogWarning(worm.WormTeam.Team.ToString());
+        GameController.Instance.EndMatch(worm.WormTeam.Team.ToString());
         Debug.LogWarning("GOAL!");
     }
 }
