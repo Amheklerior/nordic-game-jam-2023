@@ -66,8 +66,12 @@ public class ResourcesManager : MonoBehaviour
         _pool = GetComponent<GameObjectPool>();
         _spawningArea = GetComponent<Collider2D>().bounds;
         _occupiedAreas = new List<Bounds>();
-        GameController.Instance.onMatchEnd += (_) => StopSpawning();
+        GameController.Instance.onMatchEnd += OnMatchEndCallback;
     }
+
+    private void OnDestroy() => GameController.Instance.onMatchEnd -= OnMatchEndCallback;
+
+    private void OnMatchEndCallback(string _winningTeam) => StopSpawning();
 
     private Vector3 RandomPosition()
     {

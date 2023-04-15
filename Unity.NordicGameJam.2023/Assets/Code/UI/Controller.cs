@@ -117,9 +117,7 @@ public class Controller : MonoBehaviour
         game.onRestart += () =>
         {
             HideCurrentScreen();
-            Show(_countdownScreen);
-            StartCoroutine(Countdown());
-            uiCam.enabled = false;
+            Show(_waitingRoom);
         };
     }
 
