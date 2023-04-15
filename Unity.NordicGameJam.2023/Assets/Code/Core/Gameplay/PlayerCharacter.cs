@@ -15,10 +15,16 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
 
     [Space] public float AccelerationTime;
     public AnimationCurve ForceAcceleration;
+
+    [Space]
+    public float DashForce = 15f;
+
+    public float DashCooldown = 1f;
     
     private Vector2 movementInput;
     private Rigidbody2D _rigidbody;
 
+    private float DashTimer;
     private float AccelerationTimer;
     private float _currentVelocity => 
         MaxVelocity * ForceAcceleration.Evaluate(AccelerationTimer / AccelerationTime);
@@ -74,8 +80,20 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     {
         ResourceHolder.rotation = Quaternion.Euler(0.0f, 0.0f, Time.time * 360.0f);
 
+        AccelerationTiming();
+        DashTiming();
+    }
+
+    private void DashTiming()
+    {
+        if (DashTimer != 0)
+            DashTimer = Mathf.Clamp(DashTimer - Time.deltaTime, 0, DashCooldown);
+    }
+
+    private void AccelerationTiming()
+    {
         if (movementInput != Vector2.zero && AccelerationTimer <= AccelerationTime)
-            AccelerationTimer = Mathf.Clamp(AccelerationTimer + Time.deltaTime, 0, AccelerationTime);
+            AccelerationTimer = Mathf.Clamp(AccelerationTimer + Time.deltaTime, (float)0, (float)AccelerationTime);
         else
             AccelerationTimer = 0;
     }
@@ -85,6 +103,14 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     public void OnMovement(InputValue value)
     {
         movementInput = value.Get<Vector2>();
+    }
+
+    public void OnDash(InputValue value)
+    {
+        if (DashTimer != 0) return;
+        
+        _rigidbody.AddForce(movementInput * DashForce, ForceMode2D.Impulse);
+        DashTimer = DashCooldown;
     }
 
     public void OnConsume(InputValue value) { }

@@ -66,7 +66,7 @@ Transform:
   m_Children:
   - {fileID: 9013620560289166425}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5168862394315276874
 SpriteRenderer:
@@ -133,8 +133,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0
+  m_LinearDrag: 1
+  m_AngularDrag: 1
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -190,12 +190,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1272269979948894358}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9687497aaa9e2c74c930cf4b33017475, type: 3}
+  m_Script: {fileID: 11500000, guid: f2c2489a99b2f9e45b922a3b9373fa7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ResourceHolder: {fileID: 9013620560289166425}
-  MaxVelocity: 3
   CollectedResources: []
+  MaxVelocity: 15
 --- !u!58 &1286754894014189321
 CircleCollider2D:
   m_ObjectHideFlags: 0
