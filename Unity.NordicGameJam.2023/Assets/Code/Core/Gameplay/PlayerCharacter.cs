@@ -3,8 +3,9 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Sirenix.OdinInspector;
+using UnityEngine.Serialization;
 
-public class PlayerCharacter : MonoBehaviour, IFeedable
+public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
 {
     [field: SerializeField] public TeamDefinitions PlayerTeam;
 
@@ -27,6 +28,11 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     public float DashCooldown = 1f;
 
     [Header("Attack Options")]
+    public float AttackViewRange = 3.25f;
+
+    public float MaxAttackDistance = 2f;
+    
+    [Space]
     public float PushForce;
 
     public float ActivationTimer;
@@ -38,10 +44,15 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     [Space]
     public SpriteRenderer SecondarySprite;
 
-    [Space] public TrailRenderer Trail;
+    public TrailRenderer Trail;
+    [Space] public ParticleSystem TrailParticles;
     public ParticleSystem PushEffect;
-
-    [ShowInInspector] private Vector2 movementInput;
+    public ParticleSystem AttackEffect;
+    [Space] public Transform ArrowPivot;
+    
+    private Vector2 movementInput;
+    private Vector2 aimInput;
+    
     private Rigidbody2D _rigidbody;
 
     #region Stats
@@ -134,6 +145,15 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
         speedModifier += .5f;
     }
 
+    public void RemoveAllResources()
+    {
+        for (int i = 0; i < CollectedResources.Count; i++)
+        {
+            CollectedResources[i]?.onConsume();
+        }
+        CollectedResources.Clear();
+    }
+    
     private void FixedUpdate()
     {
         _rigidbody.AddForce(movementInput * _currentVelocity, ForceMode2D.Force);
@@ -148,6 +168,15 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
         AccelerationTiming();
         DashTiming();
 
+        void RotateTransform(Transform form, Vector2 dir)
+        {
+            var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            form.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+        }
+        
+        RotateTransform(AttackEffect.transform, aimInput);
+        RotateTransform(ArrowPivot.transform, aimInput);
+        
         AttackTimer = Mathf.Clamp(AttackTimer - Time.deltaTime, 0, ActivationTimer);
 
         foreach (var rend in renderers)
@@ -212,9 +241,9 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     {
         _rigidbody.AddForce(dir.normalized * force, ForceMode2D.Impulse);
         PushEffect.Play();
-        CameraShake.Instance.StartShake(.2f, 1f);
+        RemoveAllResources();
+        CameraShake.Instance.StartShake(.15f, .5f);
     }
-
 
     public void ProvideFeed(float amount) { }
 
@@ -224,6 +253,54 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
 
     public void OnMovement(InputValue value) => movementInput = value.Get<Vector2>();
 
+    public void OnAim(InputValue value)
+    {
+        aimInput = value.Get<Vector2>();
+
+        if (aimInput == Vector2.zero)
+            ArrowPivot.gameObject.SetActive(false);
+        else
+            ArrowPivot.gameObject.SetActive(true);
+    }
+
+    public void OnAttack()
+    {
+        if(aimInput == Vector2.zero || CollectedResources.Count == 0) return;
+        
+        AttackEffect.Play();
+        var attacked = GetAttackedTargets();
+
+        var res = CollectedResources[0];
+        CollectedResources.Remove(res);
+        res.onConsume();
+        
+        Debug.LogWarning(attacked.Count);
+    }
+
+    public List<IAttackable> GetAttackedTargets()
+    {
+        var attacked = FindObjectsOfType<MonoBehaviour>().OfType<IAttackable>();
+        var targets = new List<IAttackable>();
+
+        foreach (var target in attacked)
+        {
+            if (target == this) continue;
+            var dot = Vector2.Dot(aimInput, transform.position - target.GetTransform().position);
+            if(dot <= AttackViewRange && Vector2.Distance(transform.position, target.GetTransform().position) <= MaxAttackDistance) targets.Add(target);
+        }
+         
+        return targets;
+    }
+
+    public void OnAttacked()
+    {
+        PushEffect.Play();
+        CameraShake.Instance.StartShake(.15f, .5f);
+        Debug.LogWarning($"{gameObject.name} HAS BEEN ATTACKED!");
+    }
+
+    public Transform GetTransform() =>
+        transform;
 
     public void OnDash(InputValue value)
     {
