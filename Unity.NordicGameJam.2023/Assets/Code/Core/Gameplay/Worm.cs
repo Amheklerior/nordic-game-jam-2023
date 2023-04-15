@@ -43,6 +43,12 @@ public class Worm : MonoBehaviour, IFeedable
         _transform = transform;
         _rigidbody = GetComponent<Rigidbody2D>();
         GenerateBody();
+
+        GetComponent<SpriteRenderer>().color = WormTeam.SecondaryColor;
+        for (int i = 0; i < tail.Count; i++)
+        {
+            tail[i].GetComponent<SpriteRenderer>().color = WormTeam.PrimaryColor;
+        }
     }
 
     private void GenerateBody()

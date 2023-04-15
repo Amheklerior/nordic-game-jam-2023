@@ -125,7 +125,7 @@
                 {
                     "name": "",
                     "id": "edd0f9fb-d732-484a-97ca-ea12a3c2ce3e",
-                    "path": "<Mouse>/leftButton",
+                    "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -136,7 +136,7 @@
                 {
                     "name": "",
                     "id": "de207382-c293-467f-99ab-4bc2231d74f6",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
