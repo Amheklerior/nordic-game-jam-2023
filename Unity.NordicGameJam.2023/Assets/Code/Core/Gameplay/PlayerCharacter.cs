@@ -251,10 +251,9 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     private void SetupInput()
     {
         _inputHandler = GetComponent<PlayerInput>();
-        _inputHandler.DeactivateInput();
-
-        GameController.Instance.onMatchStart += () => _inputHandler.ActivateInput();
-        GameController.Instance.onMatchEnd += (_winningTeam) => _inputHandler.DeactivateInput();
+        // _inputHandler.DeactivateInput();
+        // GameController.Instance.onMatchStart += () => _inputHandler.ActivateInput();
+        // GameController.Instance.onMatchEnd += (_winningTeam) => _inputHandler.DeactivateInput();
     }
 
     #endregion

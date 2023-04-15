@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7129316038173693260}
   - component: {fileID: 6087728467143699267}
   - component: {fileID: 3104410716444002996}
-  - component: {fileID: 2534458539359481818}
   - component: {fileID: -6229847302243344484}
   - component: {fileID: 5787834473765810604}
   - component: {fileID: 2793793409403903991}
@@ -106,39 +105,57 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
+      value: 0.0019836426
+      inSlope: 2.523139
+      outSlope: 2.523139
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.23006877
     - serializedVersion: 3
-      time: 0.55022764
-      value: 0.43790787
-      inSlope: 1.7513814
-      outSlope: 1.7513814
+      time: 0.22033542
+      value: 0.39732397
+      inSlope: 1.2737535
+      outSlope: 1.2737535
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.14988486
+      outWeight: 0.24791011
+    - serializedVersion: 3
+      time: 0.4399163
+      value: 0.5967214
+      inSlope: 0.6142354
+      outSlope: 0.6142354
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.2241875
+    - serializedVersion: 3
+      time: 0.7424078
+      value: 0.66760784
+      inSlope: -0.20993201
+      outSlope: -0.20993201
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.7771984
-      value: 0.68861246
-      inSlope: -0.7812747
-      outSlope: -0.7812747
+      time: 0.9047265
+      value: 0.55260456
+      inSlope: -1.5840844
+      outSlope: -1.5840844
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.2569085
-      outWeight: 0.20939387
+      inWeight: 0.32751763
+      outWeight: 0.3084801
     - serializedVersion: 3
-      time: 1.0024061
-      value: 0.058355533
-      inSlope: -0.44570875
-      outSlope: -0.44570875
+      time: 1.0011854
+      value: 0.18839094
+      inSlope: -4.0683827
+      outSlope: -4.0683827
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.18160126
+      inWeight: 0.1477922
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -146,21 +163,10 @@ MonoBehaviour:
   BaseVelocity: 2
   MaxFeed: 10
   FeedConsumptionRate: 0.5
---- !u!114 &2534458539359481818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1675478495058653426}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3685976f3105a394b88baffd1851d189, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PrefabBodyNode: {fileID: 895024189594882185, guid: c0ea69d6db6eae541936a6f2ea2c15d0, type: 3}
-  RootRigidbody: {fileID: -6229847302243344484}
-  NodesToCreate: 8
+  TailRotationSpeed: 30
+  TailMovementSpeed: 30
+  TailNodePrefab: {fileID: 8233140212923373380, guid: c0ea69d6db6eae541936a6f2ea2c15d0, type: 3}
+  NodesToCreate: 5
 --- !u!50 &-6229847302243344484
 Rigidbody2D:
   serializedVersion: 4
@@ -169,7 +175,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1675478495058653426}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
