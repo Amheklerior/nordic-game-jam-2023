@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Sirenix.OdinInspector;
@@ -9,6 +10,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
 
     [Header("Resources")]
     public Transform ResourceHolder;
+
     public List<Resource> CollectedResources;
 
     [Header("Movement")]
@@ -32,6 +34,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     [Header("Visuals")]
     //Temp Team Visuals Change this later I guess
     public SpriteRenderer MainSprite;
+
     [Space]
     public SpriteRenderer SecondarySprite;
 
@@ -55,9 +58,10 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
 
     private PlayerCharacter _lastAttack;
 
+    private List<SpriteRenderer> renderers;
+
     [ShowInInspector]
-    private float _currentVelocity =>
-        (MaxVelocity + speedModifier) * ForceAcceleration.Evaluate(AccelerationTimer / AccelerationTime);
+    private float _currentVelocity => (MaxVelocity + speedModifier) * ForceAcceleration.Evaluate(AccelerationTimer / AccelerationTime);
 
     private TeamManager _teamManager;
 
@@ -66,6 +70,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
         Cam = Camera.main;
         _rigidbody = GetComponent<Rigidbody2D>();
         _teamManager = FindObjectOfType<TeamManager>();
+        renderers = GetComponentsInChildren<SpriteRenderer>().ToList();
         //SetupInput(); // It is not working.. the input is successfully disabled at start, but it daoes not get enebled  
     }
 
@@ -109,8 +114,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
 
     private void OnTriggerExit2D(Collider2D col)
     {
-        if (col.gameObject.layer == GameConstants.PLAYER_LAYER && _lastAttack != null)
-            _lastAttack = null;
+        if (col.gameObject.layer == GameConstants.PLAYER_LAYER && _lastAttack != null) _lastAttack = null;
     }
 
     private void TakeResource(Resource resource)
@@ -134,7 +138,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     {
         _rigidbody.AddForce(movementInput * _currentVelocity, ForceMode2D.Force);
     }
-
+    
     private void Update()
     {
         ResourceHolder.rotation = Quaternion.Euler(0.0f, 0.0f, Time.time * 360.0f);
@@ -145,14 +149,19 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
         DashTiming();
 
         AttackTimer = Mathf.Clamp(AttackTimer - Time.deltaTime, 0, ActivationTimer);
+
+        foreach (var rend in renderers)
+        {
+            rend.material.SetVector("_Velocity", -_rigidbody.velocity);
+        }
     }
 
     private void Rewind()
     {
-        var aspect = (float)Screen.width / Screen.height;
+        var aspect = (float) Screen.width / Screen.height;
 
         var worldHeight = Cam.orthographicSize * 2;
-        var worldWidth = worldHeight * aspect;
+        var worldWidth  = worldHeight * aspect;
 
         worldHeight *= RewindOffset;
         worldWidth *= RewindOffset;
@@ -160,7 +169,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
         void ClearTrail()
         {
             Trail.Clear();
-            Trail.SetPositions(new Vector3[] { Vector3.zero });
+            Trail.SetPositions(new Vector3[] {Vector3.zero});
         }
 
         if (transform.position.x >= worldWidth / 2)
@@ -188,14 +197,13 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
 
     private void DashTiming()
     {
-        if (DashTimer != 0)
-            DashTimer = Mathf.Clamp(DashTimer - Time.deltaTime, 0, DashCooldown);
+        if (DashTimer != 0) DashTimer = Mathf.Clamp(DashTimer - Time.deltaTime, 0, DashCooldown);
     }
 
     private void AccelerationTiming()
     {
         if (movementInput != Vector2.zero && AccelerationTimer <= AccelerationTime)
-            AccelerationTimer = Mathf.Clamp(AccelerationTimer + Time.deltaTime, (float)0, (float)AccelerationTime);
+            AccelerationTimer = Mathf.Clamp(AccelerationTimer + Time.deltaTime, (float) 0, (float) AccelerationTime);
         else
             AccelerationTimer = 0;
     }
@@ -214,8 +222,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
 
     #region Actions
 
-    public void OnMovement(InputValue value) =>
-        movementInput = value.Get<Vector2>();
+    public void OnMovement(InputValue value) => movementInput = value.Get<Vector2>();
 
 
     public void OnDash(InputValue value)
@@ -272,5 +279,4 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     }
 
     #endregion
-
 }
