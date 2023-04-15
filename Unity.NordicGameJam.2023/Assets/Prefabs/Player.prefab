@@ -43,8 +43,8 @@ GameObject:
   - component: {fileID: 5168862394315276874}
   - component: {fileID: 4231757622089854969}
   - component: {fileID: 1440142643116853296}
-  - component: {fileID: 2854734714987765657}
   - component: {fileID: 1286754894014189321}
+  - component: {fileID: 8060245237058971452}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -60,7 +60,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1272269979948894358}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.2, y: 4.02, z: -15.07275}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -181,21 +181,6 @@ MonoBehaviour:
   m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &2854734714987765657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1272269979948894358}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2c2489a99b2f9e45b922a3b9373fa7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ResourceHolder: {fileID: 9013620560289166425}
-  CollectedResources: []
-  MaxVelocity: 15
 --- !u!58 &1286754894014189321
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -231,3 +216,46 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &8060245237058971452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272269979948894358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9687497aaa9e2c74c930cf4b33017475, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerTeam: 0
+  ResourceHolder: {fileID: 9013620560289166425}
+  CollectedResources: []
+  MaxVelocity: 15
+  AccelerationTime: 2
+  ForceAcceleration:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.2
+      inSlope: 0.8
+      outSlope: 0.8
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.8
+      outSlope: 0.8
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  DashForce: 15
+  DashCooldown: 1

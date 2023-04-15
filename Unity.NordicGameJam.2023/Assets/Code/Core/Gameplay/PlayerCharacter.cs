@@ -1,12 +1,12 @@
-using System;
 using System.Collections.Generic;
-using Sirenix.OdinInspector.Editor.Internal;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 public class PlayerCharacter : MonoBehaviour, IFeedable
 {
+    [field: SerializeField] public Team PlayerTeam;
+    [Space]
     public Transform ResourceHolder;
     public List<Resource> CollectedResources;
 
@@ -26,6 +26,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
 
     private float DashTimer;
     private float AccelerationTimer;
+    
     private float _currentVelocity => 
         MaxVelocity * ForceAcceleration.Evaluate(AccelerationTimer / AccelerationTime);
     
@@ -100,10 +101,10 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
 
     public void ProvideFeed(float amount) { }
 
-    public void OnMovement(InputValue value)
-    {
+    #region Actions
+
+    public void OnMovement(InputValue value) =>
         movementInput = value.Get<Vector2>();
-    }
 
     public void OnDash(InputValue value)
     {
@@ -115,4 +116,21 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
 
     public void OnConsume(InputValue value) { }
 
+    #endregion
+
+    #region Joing / Leave
+
+    public void OnPlayerJoined(PlayerInput playerInput)
+    {
+        Debug.Log(
+            $"Hello, World! Player: {playerInput.playerIndex}");
+        OnJoin();
+    }
+
+    private void OnJoin()
+    {
+        
+    }
+
+    #endregion
 }
