@@ -42,7 +42,8 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
     [Space]
     public SpriteRenderer SecondarySprite;
 
-    [Space] public TrailRenderer Trail;
+    public TrailRenderer Trail;
+    [Space] public ParticleSystem TrailParticles;
     public ParticleSystem PushEffect;
     public ParticleSystem AttackEffect;
     [Space] public Transform ArrowPivot;
@@ -77,7 +78,6 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
         Cam = Camera.main;
         _rigidbody = GetComponent<Rigidbody2D>();
         _teamManager = FindObjectOfType<TeamManager>();
-        //SetupInput(); // It is not working.. the input is successfully disabled at start, but it daoes not get enebled  
     }
 
     private void Start()
@@ -141,6 +141,15 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
         speedModifier += .5f;
     }
 
+    public void RemoveAllResources()
+    {
+        for (int i = 0; i < CollectedResources.Count; i++)
+        {
+            CollectedResources[i]?.onConsume();
+        }
+        CollectedResources.Clear();
+    }
+    
     private void FixedUpdate()
     {
         _rigidbody.AddForce(movementInput * _currentVelocity, ForceMode2D.Force);
@@ -224,6 +233,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
     {
         _rigidbody.AddForce(dir.normalized * force, ForceMode2D.Impulse);
         PushEffect.Play();
+        RemoveAllResources();
         CameraShake.Instance.StartShake(.15f, .5f);
     }
 
@@ -248,9 +258,14 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
 
     public void OnAttack()
     {
-        if(aimInput == Vector2.zero) return;
+        if(aimInput == Vector2.zero || CollectedResources.Count == 0) return;
+        
         AttackEffect.Play();
         var attacked = GetAttackedTargets();
+
+        var res = CollectedResources[0];
+        CollectedResources.Remove(res);
+        res.onConsume();
         
         Debug.LogWarning(attacked.Count);
     }
@@ -262,7 +277,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
 
         foreach (var target in attacked)
         {
-            if ((PlayerCharacter)target == this) continue;
+            if (target == this) continue;
             var dot = Vector2.Dot(aimInput, transform.position - target.GetTransform().position);
             if(dot <= AttackViewRange && Vector2.Distance(transform.position, target.GetTransform().position) <= MaxAttackDistance) targets.Add(target);
         }

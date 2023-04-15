@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-public class Worm : MonoBehaviour, IFeedable
+public class Worm : MonoBehaviour, IFeedable, IAttackable
 {
     public Transform _finishLine;
 
@@ -129,4 +129,12 @@ public class Worm : MonoBehaviour, IFeedable
         currentFeed += 1.0f;
         currentFeed = Mathf.Clamp(currentFeed, 0.0f, MaxFeed);
     }
+
+    public void OnAttacked()
+    {
+        Debug.LogWarning("A WORM HAS BEEN ATTACKED IN LEGO CITY!");
+    }
+
+    public Transform GetTransform() =>
+        transform;
 }
