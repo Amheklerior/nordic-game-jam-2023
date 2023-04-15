@@ -20,6 +20,7 @@ public class GameController
     public void StartGame()
     {
         if (State != GameState.MAIN_MENU) return;
+        SceneManager.LoadScene(GameConstants.GAMEPLAY_SCENE_ID, LoadSceneMode.Additive);
         onGameStart?.Invoke();
         State = GameState.WITING_FOR_PLAYERS;
     }
@@ -27,7 +28,6 @@ public class GameController
     public void StartMatch()
     {
         if (State != GameState.WITING_FOR_PLAYERS) return;
-        SceneManager.LoadScene(GameConstants.GAMEPLAY_SCENE_ID, LoadSceneMode.Additive);
         onMatchStart?.Invoke();
         State = GameState.PLAYING;
     }
