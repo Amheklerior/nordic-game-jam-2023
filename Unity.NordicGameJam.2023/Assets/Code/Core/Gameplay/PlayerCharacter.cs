@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -25,25 +26,44 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
 
     public float DashCooldown = 1f;
 
+    [Header("Attack Options")]
+    public float PushForce;
+
+    public float ActivationTimer;
+    
     [Header("Visuals")]
     //Temp Team Visuals Change this later I guess
     public SpriteRenderer MainSprite;
     [Space]
     public SpriteRenderer SecondarySprite;
+
+    [Space] public TrailRenderer Trail;
     
     private Vector2 movementInput;
     private Rigidbody2D _rigidbody;
 
+    #region Stats
+
+    private float speedModifier;
+
+    #endregion
+
+    private float AttackTimer;
     private float DashTimer;
     private float AccelerationTimer;
     
+    private Camera Cam;
+
+    private PlayerCharacter _lastAttack;
+    
     [ShowInInspector] private float _currentVelocity => 
-        MaxVelocity * ForceAcceleration.Evaluate(AccelerationTimer / AccelerationTime);
+        (MaxVelocity + speedModifier) * ForceAcceleration.Evaluate(AccelerationTimer / AccelerationTime);
 
     private TeamManager _teamManager;
     
     private void Awake()
     {
+        Cam = Camera.main;
         _rigidbody = GetComponent<Rigidbody2D>();
         _teamManager = FindObjectOfType<TeamManager>();
     }
@@ -74,8 +94,24 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
             
             CollectedResources.Clear();
         }
+
+        if (col.gameObject.layer == GameConstants.PLAYER_LAYER && AttackTimer != 0f)
+        {
+            var player = col.gameObject.GetComponent<PlayerCharacter>();
+            
+            if(_lastAttack == player) return;
+            _lastAttack = player;
+            
+            player.Push(_rigidbody.velocity, PushForce);
+        }
     }
-    
+
+    private void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.gameObject.layer == GameConstants.PLAYER_LAYER && _lastAttack != null)
+            _lastAttack = null;
+    }
+
     private void TakeResource(Resource resource)
     {
         CollectedResources.Add(resource);
@@ -86,7 +122,11 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
 
     public void ConsumeResource(Resource res)
     {
+        CollectedResources.Remove(res);
+        Destroy(res.gameObject);
         
+        //Temp consumption effect add more later
+        speedModifier += .2f;
     }
     
     private void FixedUpdate()
@@ -102,27 +142,47 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
         
         AccelerationTiming();
         DashTiming();
+        
+        AttackTimer= Mathf.Clamp(AttackTimer - Time.deltaTime, 0, ActivationTimer);
     }
 
     private void Rewind()
     {
         var aspect = (float)Screen.width / Screen.height;
  
-        var worldHeight = Camera.main.orthographicSize * 2;
+        var worldHeight = Cam.orthographicSize * 2;
         var worldWidth = worldHeight * aspect;
 
         worldHeight *= RewindOffset;
         worldWidth *= RewindOffset;
+
+        void ClearTrail()
+        {
+            Trail.Clear();
+            Trail.SetPositions(new Vector3[] {Vector3.zero});
+        }
         
         if (transform.position.x >= worldWidth / 2)
+        {
             transform.position -= new Vector3(worldWidth, 0);
+            ClearTrail();
+        }
         else if (transform.position.x <= -worldWidth / 2)
+        {
             transform.position += new Vector3(worldWidth, 0);
+            ClearTrail();
+        }
 
         if (transform.position.y >= worldHeight / 2)
+        {
             transform.position -= new Vector3(0, worldHeight);
+            ClearTrail();
+        }
         else if (transform.position.y <= -worldHeight / 2)
+        {
             transform.position += new Vector3(0, worldHeight);
+            ClearTrail();
+        }
     }
     
     private void DashTiming()
@@ -139,6 +199,9 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
             AccelerationTimer = 0;
     }
 
+    public void Push(Vector2 dir, float force) =>
+        _rigidbody.AddForce(dir.normalized * force, ForceMode2D.Impulse);
+    
     public void ProvideFeed(float amount) { }
 
     #region Actions
@@ -152,9 +215,15 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
         
         _rigidbody.AddForce(movementInput * DashForce, ForceMode2D.Impulse);
         DashTimer = DashCooldown;
+        AttackTimer = ActivationTimer;
     }
 
-    public void OnConsume(InputValue value) { }
+    public void OnConsume(InputValue value)
+    {
+        Debug.LogWarning("CONSUME!");
+        if(CollectedResources.Count == 0) return;
+        ConsumeResource(CollectedResources[0]);
+    }
 
     #endregion
 
@@ -172,5 +241,6 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     {
         MainSprite.color = PlayerTeam.PrimaryColor;
         SecondarySprite.color = PlayerTeam.SecondaryColor;
+        Trail.colorGradient = PlayerTeam.TrailColor;
     }
 }
