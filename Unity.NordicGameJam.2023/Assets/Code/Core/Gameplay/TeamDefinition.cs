@@ -6,6 +6,7 @@ public enum Team : byte
     BlueSlime = 2,
 }
 
+[CreateAssetMenu]
 public class TeamDefinitions : ScriptableObject
 {
     public Team Team;

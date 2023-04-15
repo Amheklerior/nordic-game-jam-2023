@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 public class PlayerCharacter : MonoBehaviour, IFeedable
 {
-    [field: SerializeField] public Team PlayerTeam;
+    [field: SerializeField] public TeamDefinitions PlayerTeam;
     [Space]
     public Transform ResourceHolder;
     public List<Resource> CollectedResources;
@@ -20,6 +20,12 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     public float DashForce = 15f;
 
     public float DashCooldown = 1f;
+
+    [Header("Visuals")]
+    //Temp Team Visuals Change this later I guess
+    public SpriteRenderer MainSprite;
+
+    public SpriteRenderer SecondarySprite;
     
     private Vector2 movementInput;
     private Rigidbody2D _rigidbody;
@@ -29,10 +35,13 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
     
     private float _currentVelocity => 
         MaxVelocity * ForceAcceleration.Evaluate(AccelerationTimer / AccelerationTime);
+
+    private TeamManager _teamManager;
     
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _teamManager = FindObjectOfType<TeamManager>();
     }
 
     public void OnTriggerEnter2D(Collider2D col)
@@ -129,8 +138,16 @@ public class PlayerCharacter : MonoBehaviour, IFeedable
 
     private void OnJoin()
     {
+        _teamManager.AddPlayer(this);
         
+        UpdatePlayerVisuals();
     }
 
     #endregion
+
+    private void UpdatePlayerVisuals()
+    {
+        MainSprite.color = PlayerTeam.PrimaryColor;
+        SecondarySprite.color = PlayerTeam.SecondaryColor;
+    }
 }
