@@ -105,10 +105,10 @@ public class Controller : MonoBehaviour
         //game.onResume += () => HideCurrentScreen();
         game.onMatchEnd += (winningTeam) =>
         {
-            _winningTeamLabel.text = winningTeam;
             uiCam.enabled = true;
+            _winningTeamLabel.text = winningTeam;
             Show(_victoryScreen);
-            ShowAfter(_waitingRoom, 4f);
+            StartCoroutine(JumpToMainMenu());
         };
         game.onGameQuit += () =>
         {
@@ -138,11 +138,11 @@ public class Controller : MonoBehaviour
         HideCurrentScreen();
     }
 
-    private IEnumerator ShowAfter(VisualElement ui, float sec)
+    private IEnumerator JumpToMainMenu()
     {
-        yield return new WaitForSeconds(sec);
+        yield return new WaitForSeconds(4f);
         HideCurrentScreen();
-        Show(ui);
+        GameController.Instance.Quit();
     }
 
     #endregion
