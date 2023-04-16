@@ -110,11 +110,16 @@ public class Worm : MonoBehaviour, IFeedable, IAttackable
         }
     }
 
+    public GameObject SnackPrefab;
+    
     public void ConsumeResource(Resource res)
     {
         currentFeed += res.FoodAmount;
         currentFeed = Mathf.Clamp(currentFeed, 0.0f, MaxFeed);
         Destroy(res.gameObject);
+
+        var snack = Instantiate(SnackPrefab, transform.position + Vector3.forward, Quaternion.identity);
+        Destroy(snack.gameObject, 2.0f);
     }
 
     private void OnDrawGizmos()

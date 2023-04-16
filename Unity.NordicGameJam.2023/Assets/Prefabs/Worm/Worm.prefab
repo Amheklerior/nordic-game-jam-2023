@@ -170,6 +170,7 @@ MonoBehaviour:
   TailMovementSpeed: 30
   TailNodePrefab: {fileID: 8233140212923373380, guid: c0ea69d6db6eae541936a6f2ea2c15d0, type: 3}
   NodesToCreate: 5
+  SnackPrefab: {fileID: 6563004779468695397, guid: 985e03fe74c429046b0eb20d28ed670e, type: 3}
 --- !u!50 &-6229847302243344484
 Rigidbody2D:
   serializedVersion: 4
