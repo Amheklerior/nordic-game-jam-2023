@@ -327,7 +327,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
 
         var res = CollectedResources[0];
         CollectedResources.Remove(res);
-        Destroy(res.gameObject);
+        res.onConsume();
     }
 
     public void OnConsume(InputValue value)
