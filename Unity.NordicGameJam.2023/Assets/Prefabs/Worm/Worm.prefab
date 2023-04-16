@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fb77925f8556dd499720df22403c569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _finishLine: {fileID: 0}
   WormTeam: {fileID: 0}
   FeedToVelocityCurve:
     serializedVersion: 2
@@ -162,7 +163,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  BaseVelocity: 2
+  BaseVelocity: 1
   MaxFeed: 10
   FeedConsumptionRate: 0.5
   TailRotationSpeed: 30
