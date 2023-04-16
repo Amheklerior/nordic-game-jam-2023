@@ -62,6 +62,7 @@ public class ResourcesManager : MonoBehaviour
         resourceObj.transform.rotation = rot;
         resourceObj.GetComponent<Resource>().onConsume += () =>
         {
+            resourceObj.GetComponent<Resource>().IsTaken = false;
             _pool.Put(resourceObj);
         };
     }
