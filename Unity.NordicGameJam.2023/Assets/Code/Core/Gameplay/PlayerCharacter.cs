@@ -311,7 +311,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
     public void OnAttacked()
     {
         Slowed();
-        CameraShake.Instance.StartShake(.05f, .75f);
+        CameraShake.Instance.StartShake(.05f, .45f);
         Debug.LogWarning($"{gameObject.name} HAS BEEN ATTACKED!");
     }
 

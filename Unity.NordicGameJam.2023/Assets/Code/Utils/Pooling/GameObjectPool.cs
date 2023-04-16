@@ -41,7 +41,11 @@ namespace NordicGameJam2023.Utils
 
         public GameObject Get() => _objectPool.Get();
 
-        public void Put(GameObject instance) => _objectPool.Put(instance);
+        public void Put(GameObject instance)
+        {
+            instance.transform.parent = null;
+            _objectPool.Put(instance);
+        }
 
         public bool HasMore() => _objectPool.HasMore();
 

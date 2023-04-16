@@ -5104,7 +5104,7 @@ MonoBehaviour:
     m_ActionName: Gameplay/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
-  m_DefaultActionMap: ff25ddf4-4018-4ca3-bc50-fffdca9c37e8
+  m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!58 &1286754894014189321
@@ -5222,9 +5222,10 @@ MonoBehaviour:
   DashForce: 15
   DashCooldown: 1
   AttackViewRange: 0.35
-  MaxAttackDistance: 3.5
+  MaxAttackDistance: 4.5
   PushForce: 15
   ActivationTimer: 0.5
+  HitSlowdownModifier: 0.5
   MainSprite: {fileID: 5168862394315276874}
   SecondarySprite: {fileID: 2148921914696398755}
   Trail: {fileID: 6395228301948648250}
