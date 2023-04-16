@@ -7,6 +7,8 @@ using UnityEngine.Serialization;
 
 public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
 {
+    public AK.Wwise.Event Food;
+    
     [field: SerializeField] public TeamDefinitions PlayerTeam;
 
     [Header("Resources")]
@@ -105,6 +107,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
             if (!re.IsTaken)
             {
                 TakeResource(re);
+                Food.Post(null);
             }
         }
 

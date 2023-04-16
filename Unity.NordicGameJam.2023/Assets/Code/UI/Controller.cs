@@ -143,6 +143,7 @@ public class Controller : MonoBehaviour
         yield return new WaitForSeconds(4f);
         HideCurrentScreen();
         GameController.Instance.Quit();
+        AkSoundEngine.SetState("Track", "StartLevel");
     }
 
     #endregion

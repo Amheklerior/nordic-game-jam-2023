@@ -31,12 +31,18 @@ public class GameController
         if (State != GameState.WITING_FOR_PLAYERS) return;
         onMatchStart?.Invoke();
         State = GameState.PLAYING;
+        startDistance = distance;
     }
 
     public void EndMatch(string winningTeam)
     {
         if (State != GameState.PLAYING) return;
         onMatchEnd?.Invoke(winningTeam);
+        firstMusicChange = false;
+        secondMusicChange = false;
+        moved = false;
+        distance = 9999f;
+        AkSoundEngine.SetState("Track", "RaceWon");
         State = GameState.MATCH_COMPLETED;
     }
 
@@ -67,18 +73,7 @@ public class GameController
         onGameQuit?.Invoke();
         State = GameState.MAIN_MENU;
     }
-
-    public void Exit()
-    {
-        if (State != GameState.MAIN_MENU) return;
-        onExit?.Invoke();
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
-    }
-
+    
     #endregion
 
     #region Game Events
@@ -105,6 +100,11 @@ public class GameController
 
     #region
 
+    private float startDistance;
+    private bool firstMusicChange = false;
+    private bool secondMusicChange = false;
+    private bool moved = false;
+    
     private float distance = 9999f;
     public float DistanceFromTheFinishLine
     {
@@ -112,6 +112,23 @@ public class GameController
         set
         {
             if (value <= distance) distance = value;
+            if (distance <= startDistance * .98f && !moved)
+            {
+                moved = true;
+                AkSoundEngine.SetState("Track", "FirstWormMoves");
+            }
+            
+            if (distance <= startDistance * .66 && !firstMusicChange)
+            {
+                AkSoundEngine.SetState("Track", "Increase1");
+                firstMusicChange = true;
+            }
+            
+            if (distance <= startDistance * .33 && !secondMusicChange)
+            {
+                AkSoundEngine.SetState("Track", "Increase2");
+                secondMusicChange = true;
+            }
         }
     }
 
