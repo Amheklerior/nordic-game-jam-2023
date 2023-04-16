@@ -7,7 +7,12 @@ using UnityEngine.Serialization;
 
 public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
 {
-    public AK.Wwise.Event Food;
+    public AudioClip Food;
+    public AudioClip Dash;
+    public AudioClip Puke;
+    public AudioClip Snak;
+
+    public AudioSource Source;
     
     [field: SerializeField] public TeamDefinitions PlayerTeam;
 
@@ -107,7 +112,8 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
             if (!re.IsTaken)
             {
                 TakeResource(re);
-                Food.Post(null);
+                Source.clip = Food;
+                Source.Play();
             }
         }
 
@@ -155,6 +161,9 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
 
         var snack = Instantiate(SnackPrefab, transform.position + Vector3.forward, Quaternion.identity);
         Destroy(snack.gameObject, 1.0f);
+
+        Source.clip = Snak;
+        Source.Play();
         
         //Temp consumption effect add more later
         speedModifier += .5f;
@@ -298,6 +307,10 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
         CollectedResources.Remove(res);
         res.onConsume();
 
+        
+        Source.clip = Puke;
+        Source.Play();
+        
         Debug.LogWarning(attacked.Count);
     }
 
@@ -333,6 +346,9 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
         DashTimer = DashCooldown;
         AttackTimer = ActivationTimer;
 
+        Source.clip = Dash;
+        Source.Play();
+        
         var res = CollectedResources[0];
         CollectedResources.Remove(res);
         res.onConsume();

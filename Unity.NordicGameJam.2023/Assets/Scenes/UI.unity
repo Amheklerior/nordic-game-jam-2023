@@ -332,6 +332,7 @@ GameObject:
   - component: {fileID: 1699969475}
   - component: {fileID: 1699969478}
   - component: {fileID: 1699969477}
+  - component: {fileID: 1699969479}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -530,13 +531,21 @@ MonoBehaviour:
   data:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: f4df67710b697044a9387c8f136581b6, type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: 57b6a8f588626eb4eb2a52dc3007230a, type: 2}
   decodeBank: 0
   loadAsynchronous: 0
   saveDecodedBank: 0
   unloadTriggerList: 958ca0ea
   bankNameInternal: 
   valueGuidInternal: 
+--- !u!81 &1699969479
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699969470}
+  m_Enabled: 1
 --- !u!1 &1721205270
 GameObject:
   m_ObjectHideFlags: 0

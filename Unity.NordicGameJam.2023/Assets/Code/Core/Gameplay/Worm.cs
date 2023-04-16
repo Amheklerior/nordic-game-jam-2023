@@ -7,6 +7,9 @@ using Random = UnityEngine.Random;
 
 public class Worm : MonoBehaviour, IFeedable, IAttackable
 {
+    public AudioSource Source;
+    public AudioClip Eat;
+    
     public Transform _finishLine;
 
     public TeamDefinitions WormTeam;
@@ -118,6 +121,9 @@ public class Worm : MonoBehaviour, IFeedable, IAttackable
         currentFeed = Mathf.Clamp(currentFeed, 0.0f, MaxFeed);
         Destroy(res.gameObject);
 
+        Source.clip = Eat;
+        Source.Play();
+        
         var snack = Instantiate(SnackPrefab, transform.position + Vector3.forward, Quaternion.identity);
         Destroy(snack.gameObject, 2.0f);
     }
