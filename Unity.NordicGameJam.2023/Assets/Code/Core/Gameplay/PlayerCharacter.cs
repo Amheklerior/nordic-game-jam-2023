@@ -305,8 +305,6 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
 
     public void OnAttacked()
     {
-        PushEffect.Play();
-        CameraShake.Instance.StartShake(.15f, .5f);
         Debug.LogWarning($"{gameObject.name} HAS BEEN ATTACKED!");
     }
 
