@@ -5,7 +5,7 @@
             <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
             <ui:VisualElement name="box">
                 <ui:VisualElement name="page-title">
-                    <ui:Label text="GAME TITLE" name="title" style="font-size: 42px;" />
+                    <ui:VisualElement name="Logo" style="flex-grow: 1; width: 50%; height: 100%; align-items: center; background-image: url(&apos;project://database/Assets/Art/Sprites/temp-logo.png?fileID=2800000&amp;guid=9d245428b6a987143ae0b7f58bf9d1e9&amp;type=3#temp-logo&apos;);" />
                 </ui:VisualElement>
                 <ui:VisualElement name="menu" style="display: none;">
                     <ui:Button name="play-btn" enable-rich-text="true" class="menu-button">
