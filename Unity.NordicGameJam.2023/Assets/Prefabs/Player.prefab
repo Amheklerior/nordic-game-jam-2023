@@ -5196,7 +5196,7 @@ MonoBehaviour:
   Food: {fileID: 8300000, guid: 5ebafe821fd76fb458440ddef7115704, type: 3}
   Dash: {fileID: 8300000, guid: b6cc30197d2e3914fa553e5fb39497b2, type: 3}
   Puke: {fileID: 8300000, guid: 664aee9d0a05d744e91e4591941a5cdd, type: 3}
-  Snak: {fileID: 8300000, guid: 800c23bef49d2224c9a638abe5d6f779, type: 3}
+  Snak: {fileID: 8300000, guid: b845fbd188147ba4dab12c9e128d58c8, type: 3}
   Source: {fileID: 1660890946579150073}
   PlayerTeam: {fileID: 0}
   ResourceHolder: {fileID: 9013620560289166425}
@@ -5298,6 +5298,7 @@ MonoBehaviour:
   multiPositionTypeLabel: 0
   attenuationSphereColor: {r: 1, g: 0, b: 0, a: 0.1}
   LargeModePositions:
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
