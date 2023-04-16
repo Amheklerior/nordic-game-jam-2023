@@ -37,6 +37,8 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
 
     public float ActivationTimer;
 
+    [Space] public float HitSlowdownModifier = .5f;
+
     [Header("Visuals")]
     //Temp Team Visuals Change this later I guess
     public SpriteRenderer MainSprite;
@@ -64,6 +66,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
     private float AttackTimer;
     private float DashTimer;
     private float AccelerationTimer;
+    private float SlowdownTimer;
 
     private Camera Cam;
 
@@ -83,10 +86,6 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
         _teamManager = FindObjectOfType<TeamManager>();
 
         renderers = GetComponentsInChildren<SpriteRenderer>().ToList();
-
-
-
-        //SetupInput(); // It is not working.. the input is successfully disabled at start, but it daoes not get enebled  
     }
 
     private void Start()
@@ -165,7 +164,9 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
 
     private void FixedUpdate()
     {
-        _rigidbody.AddForce(movementInput * _currentVelocity, ForceMode2D.Force);
+        var dir = movementInput * _currentVelocity;
+        if (SlowdownTimer != 0f) dir *= HitSlowdownModifier;
+        _rigidbody.AddForce(dir, ForceMode2D.Force);
     }
 
     private void Update()
@@ -187,7 +188,8 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
         RotateTransform(ArrowPivot.transform, aimInput);
 
         AttackTimer = Mathf.Clamp(AttackTimer - Time.deltaTime, 0, ActivationTimer);
-
+        SlowdownTimer = Mathf.Clamp(SlowdownTimer - Time.deltaTime, 0, float.MaxValue);
+        
         foreach (var rend in renderers)
         {
             rend.material.SetVector("_Velocity", -_rigidbody.velocity);
@@ -238,6 +240,9 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
         if (DashTimer != 0) DashTimer = Mathf.Clamp(DashTimer - Time.deltaTime, 0, DashCooldown);
     }
 
+    private void Slowed() =>
+        SlowdownTimer = 5f;
+    
     private void AccelerationTiming()
     {
         if (movementInput != Vector2.zero && AccelerationTimer <= AccelerationTime)
@@ -305,6 +310,8 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
 
     public void OnAttacked()
     {
+        Slowed();
+        CameraShake.Instance.StartShake(.05f, .75f);
         Debug.LogWarning($"{gameObject.name} HAS BEEN ATTACKED!");
     }
 
@@ -312,7 +319,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
 
     public void OnDash(InputValue value)
     {
-        if (DashTimer != 0 || !CanDash()) return;
+        if (DashTimer != 0 || !CanDash() || SlowdownTimer != 0) return;
 
         _rigidbody.AddForce(movementInput * DashForce, ForceMode2D.Impulse);
         DashTimer = DashCooldown;
@@ -360,6 +367,13 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
         SetColor(TrailParticles, PlayerTeam.SecondaryColor);
     }
 
+    #region Testing
+
+    [Button]
+    public void TestSlowdown() => Slowed();
+
+    #endregion
+    
     #region Input Management
 
     private PlayerInput _inputHandler;
