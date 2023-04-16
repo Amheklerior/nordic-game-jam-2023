@@ -5233,6 +5233,7 @@ MonoBehaviour:
   PushEffect: {fileID: 5177939001803857509}
   AttackEffect: {fileID: 1673776658973476069}
   ArrowPivot: {fileID: 4671196797773338192}
+  SnackPrefab: {fileID: 6563004779468695397, guid: 985e03fe74c429046b0eb20d28ed670e, type: 3}
 --- !u!1 &1373518750456202518
 GameObject:
   m_ObjectHideFlags: 0

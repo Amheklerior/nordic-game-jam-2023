@@ -143,11 +143,16 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
         resource.transform.localPosition = Random.insideUnitCircle * 1.25f;
     }
 
+    public GameObject SnackPrefab;
+    
     public void ConsumeResource(Resource res)
     {
         CollectedResources.Remove(res);
         res.onConsume();
 
+        var snack = Instantiate(SnackPrefab, transform.position + Vector3.forward, Quaternion.identity);
+        Destroy(snack.gameObject, 1.0f);
+        
         //Temp consumption effect add more later
         speedModifier += .5f;
     }
