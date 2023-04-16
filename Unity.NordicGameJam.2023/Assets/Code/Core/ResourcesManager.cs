@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NordicGameJam2023.Utils;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class ResourcesManager : MonoBehaviour
@@ -13,13 +15,28 @@ public class ResourcesManager : MonoBehaviour
     private AnimationCurve _spawnFrequency;
 
     private Timer _timer;
+    private bool _spawning = false;
 
-    private void Start() => StartSpawning();
+    private void Start()
+    {
+        GameController.Instance.onMatchStart += StartSpawning;
+    }
 
-    private void Update() => _timer.Tick(Time.deltaTime);
+    private void OnDisable()
+    {
+        GameController.Instance.onMatchStart -= StartSpawning;
+    }
+
+    private void Update()
+    {
+        if(!_spawning) return;
+        
+        _timer.Tick(Time.deltaTime);
+    }
 
     private void StartSpawning()
     {
+        _spawning = true;
         InitialSpawn();
         _timer = new Timer(SpawnRate, () =>
         {
