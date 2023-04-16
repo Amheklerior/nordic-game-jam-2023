@@ -47,6 +47,28 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Play_Puke" ID="{0E931FD4-AE54-45C8-B7DF-13F1538D3531}">
+					<ChildrenList>
+						<Action Name="" ID="{54A0FE4B-0547-4D40-B9D0-3DFC5F6F458D}" ShortID="760624423">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Puke" ID="{78470CB8-38B4-41F4-815A-B6215187EFED}" WorkUnitID="{08C1F282-770B-4237-AD0A-293A55371103}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Dash" ID="{72E7F789-BC0F-406D-BD6A-C124F2EA0E31}">
+					<ChildrenList>
+						<Action Name="" ID="{986167D2-228C-4013-8018-A954977A79EE}" ShortID="385201668">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Dash" ID="{950523F5-E8AC-4EF7-91D4-8BFB53400812}" WorkUnitID="{08C1F282-770B-4237-AD0A-293A55371103}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

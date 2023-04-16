@@ -178,6 +178,50 @@
 								</Sound>
 							</ChildrenList>
 						</RandomSequenceContainer>
+						<Sound Name="Puke" ID="{78470CB8-38B4-41F4-815A-B6215187EFED}" ShortID="673768986">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A55EE9E4-593B-438B-8F12-B108A4D0D233}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8E544824-84DE-4704-8053-34D57FE49720}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="Puke" ID="{CAE1FE74-6C23-486A-AE7C-41029DEC8C63}">
+									<Language>SFX</Language>
+									<AudioFile>Puke.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="266404125"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="Puke" ID="{CAE1FE74-6C23-486A-AE7C-41029DEC8C63}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="Dash" ID="{950523F5-E8AC-4EF7-91D4-8BFB53400812}" ShortID="379906115">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A55EE9E4-593B-438B-8F12-B108A4D0D233}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8E544824-84DE-4704-8053-34D57FE49720}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="Dash" ID="{69587A60-F656-4448-A732-A41767B4A461}">
+									<Language>SFX</Language>
+									<AudioFile>Dash.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="394254654"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="Dash" ID="{69587A60-F656-4448-A732-A41767B4A461}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
 					</ChildrenList>
 				</Folder>
 			</ChildrenList>
