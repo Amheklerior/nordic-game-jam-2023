@@ -76,6 +76,9 @@ Label {
     transition-duration: 0.4s;
     transition-timing-function: ease-out-elastic;
     color: rgb(255, 255, 255);
+    -unity-font: url('project://database/Assets/Fonts/CreamySugar-gxnGR.ttf?fileID=12800000&guid=cdef2f9f4613f433ea24bf974ceb42cb&type=3#CreamySugar-gxnGR');
+    -unity-font-definition: url('project://database/Assets/Fonts/CreamySugar-gxnGR%20SDF%201.asset?fileID=11400000&guid=3979adca55e5548e191143eba1e80a73&type=2#CreamySugar-gxnGR SDF 1');
+    letter-spacing: 20px;
 }
 
 .primaryCTA {
