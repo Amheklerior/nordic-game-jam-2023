@@ -47,6 +47,18 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _AlphaClip: 0
@@ -58,6 +70,7 @@ Material:
     - _DstBlend: 10
     - _DstBlendAlpha: 10
     - _EnableExternalAlpha: 0
+    - _Multiplier: 25.21
     - _QueueOffset: 0
     - _SampleGI: 0
     - _SrcBlend: 5
@@ -69,6 +82,7 @@ Material:
     - _Color: {r: 0, g: 0, b: 0, a: 0.5647059}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Velocity: {r: 1.07, g: 0.65, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &3721563324410264263
 MonoBehaviour:
