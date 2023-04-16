@@ -1,6 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WwiseDocument Type="WorkUnit" ID="{360B4F47-1816-4131-AC8E-48297CC97A48}" SchemaVersion="110">
+<WwiseDocument Type="WorkUnit" ID="{08C1F282-770B-4237-AD0A-293A55371103}" SchemaVersion="110">
 	<AudioObjects>
-		<WorkUnit Name="Default Work Unit" ID="{360B4F47-1816-4131-AC8E-48297CC97A48}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{08C1F282-770B-4237-AD0A-293A55371103}" PersistMode="Standalone">
+			<ChildrenList>
+				<Folder Name="UI" ID="{A7FF1DAD-6660-4A53-B8C4-A7B08EBF28ED}" ShortID="359368610">
+					<ChildrenList>
+						<Sound Name="UI_Highlight" ID="{C6E1340B-23D6-40A7-87BD-55B0CC558F3F}" ShortID="814144721">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A55EE9E4-593B-438B-8F12-B108A4D0D233}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8E544824-84DE-4704-8053-34D57FE49720}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="UI Click" ID="{231E745B-A828-48AF-8655-2D8B6A984463}">
+									<Language>SFX</Language>
+									<AudioFile>UI Click.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="861761786"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="UI Click" ID="{231E745B-A828-48AF-8655-2D8B6A984463}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="Track" ID="{00B32CF8-8B19-4F37-A596-97C98A375BB5}" ShortID="905297147">
+					<ChildrenList>
+						<Sound Name="FeedWorm" ID="{2298B902-503F-4AC0-8F57-9A5C478BC619}" ShortID="266314863">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A55EE9E4-593B-438B-8F12-B108A4D0D233}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8E544824-84DE-4704-8053-34D57FE49720}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX_FeedSnake" ID="{E609A5F5-320E-43EB-9477-FEF8445EA5A6}">
+									<Language>SFX</Language>
+									<AudioFile>SFX_FeedSnake.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="125486861"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX_FeedSnake" ID="{E609A5F5-320E-43EB-9477-FEF8445EA5A6}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<RandomSequenceContainer Name="Food" ID="{F453E8BD-CE3B-4FAE-9D4F-1FA824A873A6}" ShortID="88077026">
+							<PropertyList>
+								<Property Name="OutputBusLowpass" Type="int16">
+									<ValueList>
+										<Value>61</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Pitch" Type="int32">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{F3A3E16E-9B68-457D-9E57-40E5304C4A86}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="200"/>
+													<Property Name="Min" Type="Real64" Value="-126"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-3</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A55EE9E4-593B-438B-8F12-B108A4D0D233}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8E544824-84DE-4704-8053-34D57FE49720}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="Food_01" ID="{50B060D1-B15B-41AD-A8BA-F093BAF25E0E}" ShortID="520169943">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A55EE9E4-593B-438B-8F12-B108A4D0D233}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8E544824-84DE-4704-8053-34D57FE49720}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Food_01" ID="{A17160C9-6D2A-4090-96D6-301C3BABD7B8}">
+											<Language>SFX</Language>
+											<AudioFile>Food_01.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="755105585"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Food_01" ID="{A17160C9-6D2A-4090-96D6-301C3BABD7B8}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Food_02" ID="{272D53AB-6EA6-4742-BBCB-95B6B4AA94F2}" ShortID="514238253">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A55EE9E4-593B-438B-8F12-B108A4D0D233}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8E544824-84DE-4704-8053-34D57FE49720}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Food_02" ID="{23B087D7-B6E5-4AC2-9E68-7D037B2809E1}">
+											<Language>SFX</Language>
+											<AudioFile>Food_02.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="120612364"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Food_02" ID="{23B087D7-B6E5-4AC2-9E68-7D037B2809E1}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Food_04" ID="{A56B5DFF-803D-4AB7-9131-B964B29390F1}" ShortID="215593391">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A55EE9E4-593B-438B-8F12-B108A4D0D233}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8E544824-84DE-4704-8053-34D57FE49720}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Food_04" ID="{CF33C363-6B87-417F-B675-85572EAF882E}">
+											<Language>SFX</Language>
+											<AudioFile>Food_04.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="72293616"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Food_04" ID="{CF33C363-6B87-417F-B675-85572EAF882E}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Food_05" ID="{822B26D3-D535-4F4F-BBDC-F8B9E2B505E7}" ShortID="344408035">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A55EE9E4-593B-438B-8F12-B108A4D0D233}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8E544824-84DE-4704-8053-34D57FE49720}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Food_05" ID="{EC2058AB-4F52-4F4B-8EBB-63405376BC46}">
+											<Language>SFX</Language>
+											<AudioFile>Food_05.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="654104278"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Food_05" ID="{EC2058AB-4F52-4F4B-8EBB-63405376BC46}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
+					</ChildrenList>
+				</Folder>
+			</ChildrenList>
+		</WorkUnit>
 	</AudioObjects>
 </WwiseDocument>

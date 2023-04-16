@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WwiseDocument Type="WorkUnit" ID="{DA5C9907-4E30-4FF3-BA8E-A0B6D1D0FB75}" SchemaVersion="110">
+<WwiseDocument Type="WorkUnit" ID="{E4F429B5-6670-4F22-A897-1100A4C2AA5D}" SchemaVersion="110">
 	<States>
-		<WorkUnit Name="Default Work Unit" ID="{DA5C9907-4E30-4FF3-BA8E-A0B6D1D0FB75}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{E4F429B5-6670-4F22-A897-1100A4C2AA5D}" PersistMode="Standalone">
+			<ChildrenList>
+				<StateGroup Name="Track" ID="{41049A98-AC8F-4835-8F75-CD0B986F4D39}">
+					<ChildrenList>
+						<State Name="None" ID="{734D1E04-BE69-494C-AEE1-1356E0A1D1B9}"/>
+						<State Name="StartLevel" ID="{3CA112B7-7481-4955-BD99-B1D402CF7301}"/>
+						<State Name="FirstWormMoves" ID="{E94E1B59-D9F8-4088-BE3E-76B773F69639}"/>
+						<State Name="RaceWon" ID="{30CFEF34-F48E-4614-AB11-ED275E2B32CA}"/>
+						<State Name="Increase1" ID="{E6AEE801-3A72-4E08-B382-EE93364B16CC}"/>
+						<State Name="Increase2" ID="{E8B31D11-2DB7-4FDD-A21B-BEA278F673E4}"/>
+					</ChildrenList>
+				</StateGroup>
+			</ChildrenList>
+		</WorkUnit>
 	</States>
 </WwiseDocument>

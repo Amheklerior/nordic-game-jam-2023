@@ -21,6 +21,7 @@ public class GameController
         if (State != GameState.MAIN_MENU) return;
         onGameStart?.Invoke();
         State = GameState.WITING_FOR_PLAYERS;
+        AkSoundEngine.SetState("Track", "StartLevel");
     }
 
     public void GetReady() => onMatchReady?.Invoke();

@@ -1,6 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WwiseDocument Type="WorkUnit" ID="{3CF49369-E0A5-48E8-8244-3B39BCA050B1}" SchemaVersion="110">
+<WwiseDocument Type="WorkUnit" ID="{BDEB0E92-807B-4FB6-8B8A-9A5A0D7016F1}" SchemaVersion="110">
 	<Events>
-		<WorkUnit Name="Default Work Unit" ID="{3CF49369-E0A5-48E8-8244-3B39BCA050B1}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{BDEB0E92-807B-4FB6-8B8A-9A5A0D7016F1}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="Play_FeedWorm" ID="{7138159E-D5E2-4C27-BEFF-E8B1324C436E}">
+					<ChildrenList>
+						<Action Name="" ID="{32BF4E00-A611-4040-9633-5DFF97520D9B}" ShortID="1053057337">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="FeedWorm" ID="{2298B902-503F-4AC0-8F57-9A5C478BC619}" WorkUnitID="{08C1F282-770B-4237-AD0A-293A55371103}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_UI_Highlight" ID="{8E04D870-96C6-4AF1-8B05-4DABA5D83341}">
+					<ChildrenList>
+						<Action Name="" ID="{F6CEFB0F-D417-4E67-82DC-CC525CF99071}" ShortID="82506390">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="UI_Highlight" ID="{C6E1340B-23D6-40A7-87BD-55B0CC558F3F}" WorkUnitID="{08C1F282-770B-4237-AD0A-293A55371103}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Food" ID="{54D64771-9130-4810-8580-7BC5361D641B}">
+					<ChildrenList>
+						<Action Name="" ID="{6B8DA946-73CC-4729-9C45-99D6B2B2BE63}" ShortID="577369269">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Food" ID="{F453E8BD-CE3B-4FAE-9D4F-1FA824A873A6}" WorkUnitID="{08C1F282-770B-4237-AD0A-293A55371103}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_WormTrack" ID="{30640C49-A714-4EA5-8793-9A001133A3BB}">
+					<ChildrenList>
+						<Action Name="" ID="{7B43DDCB-B326-433B-BC55-793CB2019282}" ShortID="33290117">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="WormTrack" ID="{92B16896-B912-49C8-9863-44993328482F}" WorkUnitID="{A94C83A7-DF73-42B2-AC0E-823E80D7F3B7}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
 	</Events>
 </WwiseDocument>

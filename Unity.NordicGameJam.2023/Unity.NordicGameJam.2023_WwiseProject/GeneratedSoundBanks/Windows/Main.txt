@@ -1,0 +1,28 @@
+Event	ID	Name			Wwise Object Path	Notes
+	392350412	Play_WormTrack			\Default Work Unit\Play_WormTrack	
+
+State Group	ID	Name			Wwise Object Path	Notes
+	3579833626	Track			\Default Work Unit\Track	
+
+State	ID	Name	State Group			Notes
+	748895195	None	Track			
+	1923618618	FirstWormMoves	Track			
+	2490007694	RaceWon	Track			
+	2563869469	Increase2	Track			
+	2563869470	Increase1	Track			
+	3385657599	StartLevel	Track			
+
+Audio Bus	ID	Name			Wwise Object Path	Notes
+	393239870	SFX			\Default Work Unit\Master Audio Bus\SFX	
+	3803692087	Master Audio Bus			\Default Work Unit\Master Audio Bus	
+	3991942870	Music			\Default Work Unit\Master Audio Bus\Music	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	137189423	MusicIntro	C:\Users\johan\nordic-game-jam-2023\Unity.NordicGameJam.2023\Unity.NordicGameJam.2023_WwiseProject\.cache\Windows\SFX\MusicIntro_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\WormTrack\Intro\IntroMusic\MusicIntro		1104512
+	170285555	Increase2	C:\Users\johan\nordic-game-jam-2023\Unity.NordicGameJam.2023\Unity.NordicGameJam.2023_WwiseProject\.cache\Windows\SFX\Increase2_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\WormTrack\Increase2\Increase2\Increase2		1656720
+	620610353	TransaitionIncrease	C:\Users\johan\nordic-game-jam-2023\Unity.NordicGameJam.2023\Unity.NordicGameJam.2023_WwiseProject\.cache\Windows\SFX\TransaitionIncrease_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\WormTrack\TransitionIncrease\TransaitionIncrease		644340
+	738795198	MoveBeat	C:\Users\johan\nordic-game-jam-2023\Unity.NordicGameJam.2023\Unity.NordicGameJam.2023_WwiseProject\.cache\Windows\SFX\MoveBeatExtraBass_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\WormTrack\BeatAfterMove\BeatAfterMove\MoveBeat		1656720
+	799779184	Increase1	C:\Users\johan\nordic-game-jam-2023\Unity.NordicGameJam.2023\Unity.NordicGameJam.2023_WwiseProject\.cache\Windows\SFX\Increase1_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\WormTrack\Increase1\Increase1\Increase1		1656720
+	915998397	RaceWon	C:\Users\johan\nordic-game-jam-2023\Unity.NordicGameJam.2023\Unity.NordicGameJam.2023_WwiseProject\.cache\Windows\SFX\RaceWon_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\WormTrack\RaceWon\RaceWon\RaceWon		736372
+	966314869	First Transition	C:\Users\johan\nordic-game-jam-2023\Unity.NordicGameJam.2023\Unity.NordicGameJam.2023_WwiseProject\.cache\Windows\SFX\First Transition_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\Transition\First Transition		920444
+

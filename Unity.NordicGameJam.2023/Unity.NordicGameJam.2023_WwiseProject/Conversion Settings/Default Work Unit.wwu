@@ -1,47 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WwiseDocument Type="WorkUnit" ID="{05CD864D-E208-4677-8119-61D4443D7298}" SchemaVersion="110">
+<WwiseDocument Type="WorkUnit" ID="{A55EE9E4-593B-438B-8F12-B108A4D0D233}" SchemaVersion="110">
 	<Conversions>
-		<WorkUnit Name="Default Work Unit" ID="{05CD864D-E208-4677-8119-61D4443D7298}" PersistMode="Standalone">
+		<WorkUnit Name="Default Work Unit" ID="{A55EE9E4-593B-438B-8F12-B108A4D0D233}" PersistMode="Standalone">
 			<ChildrenList>
 				<Conversion Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}">
 					<PropertyList>
 						<Property Name="Channels" Type="int32">
 							<ValueList>
 								<Value Platform="Windows">4</Value>
-								<Value Platform="Mac">4</Value>
 							</ValueList>
 						</Property>
 						<Property Name="LRMix" Type="Real64">
 							<ValueList>
 								<Value Platform="Windows">0</Value>
-								<Value Platform="Mac">0</Value>
 							</ValueList>
 						</Property>
 						<Property Name="MaxSampleRate" Type="int32">
 							<ValueList>
 								<Value Platform="Windows">0</Value>
-								<Value Platform="Mac">0</Value>
 							</ValueList>
 						</Property>
 						<Property Name="MinSampleRate" Type="int32">
 							<ValueList>
 								<Value Platform="Windows">0</Value>
-								<Value Platform="Mac">0</Value>
 							</ValueList>
 						</Property>
 						<Property Name="SampleRate" Type="int32">
 							<ValueList>
 								<Value Platform="Windows">0</Value>
-								<Value Platform="Mac">0</Value>
 							</ValueList>
 						</Property>
 					</PropertyList>
 					<ConversionPluginInfoList>
 						<ConversionPluginInfo Platform="Windows">
-							<ConversionPlugin Name="" ID="{1798284E-BE87-40A1-B4F8-4DA918599A07}" PluginName="PCM" CompanyID="0" PluginID="1"/>
-						</ConversionPluginInfo>
-						<ConversionPluginInfo Platform="Mac">
-							<ConversionPlugin Name="" ID="{D73F09D7-C4BF-471A-B373-EACE8C02BEC8}" PluginName="PCM" CompanyID="0" PluginID="1"/>
+							<ConversionPlugin Name="" ID="{0073ABF6-7F6B-47DD-935A-6309E8C7E877}" PluginName="PCM" CompanyID="0" PluginID="1"/>
 						</ConversionPluginInfo>
 					</ConversionPluginInfoList>
 				</Conversion>
