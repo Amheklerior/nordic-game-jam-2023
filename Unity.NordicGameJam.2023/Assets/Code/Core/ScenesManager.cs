@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class ScenesManager : MonoBehaviour
@@ -17,6 +18,22 @@ public class ScenesManager : MonoBehaviour
             LoadGameScene();
         };
         game.onGameQuit += UnloadGameScene;
+    }
+
+    private void Update()
+    {
+        if (GameController.Instance.State != GameController.GameState.MAIN_MENU) return;
+
+        var input = Gamepad.current;
+        if (input != null && (input.buttonNorth.wasPressedThisFrame ||
+            input.buttonSouth.wasPressedThisFrame ||
+            input.buttonEast.wasPressedThisFrame ||
+            input.buttonWest.wasPressedThisFrame ||
+            input.startButton.wasPressedThisFrame))
+            GameController.Instance.StartGame();
+
+        if (Keyboard.current.anyKey.wasPressedThisFrame)
+            GameController.Instance.StartGame();
     }
 
     private void LoadGameScene() => StartCoroutine(LoadGameSceneCoroutine());

@@ -75,6 +75,7 @@ Label {
     font-size: 16px;
     transition-duration: 0.4s;
     transition-timing-function: ease-out-elastic;
+    color: rgb(255, 255, 255);
 }
 
 .primaryCTA {
@@ -92,5 +93,4 @@ Label {
     padding-right: 24px;
     padding-top: 24px;
     padding-bottom: 24px;
-    background-color: rgb(233, 233, 233);
 }

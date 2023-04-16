@@ -2,11 +2,12 @@
     <Style src="project://database/Assets/UI/Style/global.styles.uss?fileID=7433441132597879392&amp;guid=5fc64ed79cd704cfeb569ba8e03ab2c6&amp;type=3#global.styles" />
     <ui:VisualElement name="main-panel" class="panel window">
         <ui:VisualElement name="center-column">
+            <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
             <ui:VisualElement name="box">
                 <ui:VisualElement name="page-title">
                     <ui:Label text="GAME TITLE" name="title" style="font-size: 42px;" />
                 </ui:VisualElement>
-                <ui:VisualElement name="menu">
+                <ui:VisualElement name="menu" style="display: none;">
                     <ui:Button name="play-btn" enable-rich-text="true" class="menu-button">
                         <ui:Label text="Play" name="play-btn-text" class="primaryCTA" />
                     </ui:Button>
@@ -14,7 +15,9 @@
                         <ui:Label text="Exit" enable-rich-text="true" name="exit-btn-text" />
                     </ui:Button>
                 </ui:VisualElement>
+                <ui:Label tabindex="-1" text="Press any key to start..." display-tooltip-when-elided="true" name="prompt" style="-unity-text-align: middle-center;" />
             </ui:VisualElement>
+            <ui:VisualElement style="flex-grow: 2; background-color: rgba(0, 0, 0, 0);" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
