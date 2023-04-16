@@ -4992,7 +4992,7 @@ Transform:
   - {fileID: 379206700318634676}
   - {fileID: 4671196797773338192}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5168862394315276874
 SpriteRenderer:
@@ -5102,9 +5102,9 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 1920dbbd-63b3-40a2-8461-33ae997151ae
     m_ActionName: Gameplay/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
-  m_NeverAutoSwitchControlSchemes: 0
+  m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Gameplay
+  m_DefaultActionMap: ff25ddf4-4018-4ca3-bc50-fffdca9c37e8
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!58 &1286754894014189321

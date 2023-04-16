@@ -11,7 +11,7 @@ public class Controller : MonoBehaviour
         GeUIElementRefs();
 
         var game = GameController.Instance;
-        WireInteractionLogicToUIElements(game);
+        //WireInteractionLogicToUIElements(game);
         WireReactionToGameStateChanges(game);
     }
 
@@ -21,22 +21,22 @@ public class Controller : MonoBehaviour
 
     // Main Menu Screen
     private VisualElement _mainMenuScreen;
-    private Button _playBtn;
-    private Button _exitBtn;
+    //private Button _playBtn;
+    //private Button _exitBtn;
 
     // Waiting for Players Screen
     private VisualElement _waitingRoom;
 
     // Pause Menu Screen
-    private VisualElement _pauseMenuScreen;
-    private Button _resumeBtn;
-    private Button _quitBtn;
+    //private VisualElement _pauseMenuScreen;
+    //private Button _resumeBtn;
+    //private Button _quitBtn;
 
     // Victory Screen
     private VisualElement _victoryScreen;
     private Label _winningTeamLabel;
-    private Button _playAgainBtn;
-    private Button _quitMatchBtn;
+    //private Button _playAgainBtn;
+    //private Button _quitMatchBtn;
 
     // Cowntdown Screen
     private VisualElement _countdownScreen;
@@ -49,19 +49,19 @@ public class Controller : MonoBehaviour
         var root = _doc.rootVisualElement;
 
         _mainMenuScreen = root.Q<VisualElement>("GameMenuUI");
-        _playBtn = root.Q<Button>("play-btn");
-        _exitBtn = root.Q<Button>("exit-btn");
+        //_playBtn = root.Q<Button>("play-btn");
+        //_exitBtn = root.Q<Button>("exit-btn");
 
         _waitingRoom = root.Q<VisualElement>("WaitingRoomUI");
 
-        _pauseMenuScreen = root.Q<VisualElement>("PauseUI");
-        _resumeBtn = root.Q<Button>("resume-btn");
-        _quitBtn = root.Q<Button>("quit-btn");
+        //_pauseMenuScreen = root.Q<VisualElement>("PauseUI");
+        //_resumeBtn = root.Q<Button>("resume-btn");
+        //_quitBtn = root.Q<Button>("quit-btn");
 
         _victoryScreen = root.Q<VisualElement>("VictoryUI");
         _winningTeamLabel = root.Q<Label>("team-label");
-        _playAgainBtn = root.Q<Button>("play-again-btn");
-        _quitMatchBtn = root.Q<Button>("quit-match-btn");
+        //_playAgainBtn = root.Q<Button>("play-again-btn");
+        //_quitMatchBtn = root.Q<Button>("quit-match-btn");
 
         _countdownScreen = root.Q<VisualElement>("CountdownUI");
         _counterLabel = root.Q<Label>("counter");
@@ -73,15 +73,15 @@ public class Controller : MonoBehaviour
 
     #region UI Interactions
 
-    private void WireInteractionLogicToUIElements(GameController game)
-    {
-        _playBtn.clicked += () => game.StartGame();
-        _exitBtn.clicked += () => game.Exit();
-        _resumeBtn.clicked += () => game.Resume();
-        _quitBtn.clicked += () => game.Quit();
-        _playAgainBtn.clicked += () => game.Restart();
-        _quitMatchBtn.clicked += () => game.Quit();
-    }
+    //private void WireInteractionLogicToUIElements(GameController game)
+    //{
+    //    _playBtn.clicked += () => game.StartGame();
+    //    _exitBtn.clicked += () => game.Exit();
+    //    _resumeBtn.clicked += () => game.Resume();
+    //    _quitBtn.clicked += () => game.Quit();
+    //    _playAgainBtn.clicked += () => game.Restart();
+    //    _quitMatchBtn.clicked += () => game.Quit();
+    //}
 
     #endregion
 
@@ -101,13 +101,14 @@ public class Controller : MonoBehaviour
             StartCoroutine(Countdown());
             uiCam.enabled = false;
         };
-        game.onPause += () => Show(_pauseMenuScreen);
-        game.onResume += () => HideCurrentScreen();
+        //game.onPause += () => Show(_pauseMenuScreen);
+        //game.onResume += () => HideCurrentScreen();
         game.onMatchEnd += (winningTeam) =>
         {
-            _winningTeamLabel.text = winningTeam;
             uiCam.enabled = true;
+            _winningTeamLabel.text = winningTeam;
             Show(_victoryScreen);
+            StartCoroutine(JumpToMainMenu());
         };
         game.onGameQuit += () =>
         {
@@ -120,6 +121,7 @@ public class Controller : MonoBehaviour
             Show(_waitingRoom);
         };
     }
+
 
     private IEnumerator Countdown()
     {
@@ -134,6 +136,13 @@ public class Controller : MonoBehaviour
         yield return new WaitForSeconds(2f);
         _counterLabel.text = "";
         HideCurrentScreen();
+    }
+
+    private IEnumerator JumpToMainMenu()
+    {
+        yield return new WaitForSeconds(4f);
+        HideCurrentScreen();
+        GameController.Instance.Quit();
     }
 
     #endregion

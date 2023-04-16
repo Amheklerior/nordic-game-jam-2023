@@ -6,7 +6,7 @@
     <ui:Template name="CowntdownUI" src="project://database/Assets/UI/Structure/CountdownUI.uxml?fileID=9197481963319205126&amp;guid=b61ef3b50b15d4c6d9c3e86b01147f38&amp;type=3#CountdownUI" />
     <Style src="project://database/Assets/UI/Style/global.styles.uss?fileID=7433441132597879392&amp;guid=5fc64ed79cd704cfeb569ba8e03ab2c6&amp;type=3#global.styles" />
     <ui:Instance template="GameMenuUI" name="GameMenuUI" class="overlay" style="visibility: visible;" />
-    <ui:Instance template="PauseUI" name="PauseUI" class="overlay" style="visibility: hidden;" />
+    <ui:Instance template="PauseUI" name="PauseUI" class="overlay" style="visibility: hidden; display: none;" />
     <ui:Instance template="WinUI" name="VictoryUI" class="overlay" style="visibility: hidden;" />
     <ui:Instance template="GameOverUI" name="WaitingRoomUI" class="overlay" style="visibility: hidden;" />
     <ui:Instance template="CowntdownUI" name="CountdownUI" class="overlay" style="visibility: hidden;" />

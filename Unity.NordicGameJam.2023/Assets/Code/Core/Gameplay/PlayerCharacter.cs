@@ -198,10 +198,10 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
 
     private void Rewind()
     {
-        var aspect = (float) Screen.width / Screen.height;
+        var aspect = (float)Screen.width / Screen.height;
 
         var worldHeight = Cam.orthographicSize * 2;
-        var worldWidth  = worldHeight * aspect;
+        var worldWidth = worldHeight * aspect;
 
         worldHeight *= RewindOffset;
         worldWidth *= RewindOffset;
@@ -209,7 +209,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
         void ClearTrail()
         {
             Trail.Clear();
-            Trail.SetPositions(new Vector3[] {Vector3.zero});
+            Trail.SetPositions(new Vector3[] { Vector3.zero });
         }
 
         if (transform.position.x >= worldWidth / 2)
@@ -246,7 +246,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
     private void AccelerationTiming()
     {
         if (movementInput != Vector2.zero && AccelerationTimer <= AccelerationTime)
-            AccelerationTimer = Mathf.Clamp(AccelerationTimer + Time.deltaTime, (float) 0, (float) AccelerationTime);
+            AccelerationTimer = Mathf.Clamp(AccelerationTimer + Time.deltaTime, (float)0, (float)AccelerationTime);
         else
             AccelerationTimer = 0;
     }
@@ -285,7 +285,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
         var attacked = GetAttackedTargets();
 
         attacked.ForEach(x => x.OnAttacked());
-        
+
         var res = CollectedResources[0];
         CollectedResources.Remove(res);
         res.onConsume();
@@ -296,7 +296,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
     public List<IAttackable> GetAttackedTargets()
     {
         var attacked = FindObjectsOfType<MonoBehaviour>().OfType<IAttackable>();
-        var targets  = new List<IAttackable>();
+        var targets = new List<IAttackable>();
 
         foreach (var target in attacked)
         {
@@ -362,7 +362,7 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
             var main = system.main;
             main.startColor = color;
         }
-        
+
         SetColor(AttackEffect, PlayerTeam.PrimaryColor);
         SetColor(TrailParticles, PlayerTeam.SecondaryColor);
     }
@@ -373,44 +373,31 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
     public void TestSlowdown() => Slowed();
 
     #endregion
-    
-    #region Input Management
-
-    private PlayerInput _inputHandler;
-
-    private void SetupInput()
-    {
-        _inputHandler = GetComponent<PlayerInput>();
-        // _inputHandler.DeactivateInput();
-        // GameController.Instance.onMatchStart += () => _inputHandler.ActivateInput();
-        // GameController.Instance.onMatchEnd += (_winningTeam) => _inputHandler.DeactivateInput();
-    }
-
 
     void ModifyVerticees(SpriteRenderer rend)
     {
         Vector2[] newVerticees = new Vector2[64];
-        ushort[]  indicees     = new ushort[62 * 3];
-        
-        
-        ushort lastBig   = 63;
+        ushort[] indicees = new ushort[62 * 3];
+
+
+        ushort lastBig = 63;
         ushort lastSmall = 3;
-        
+
         ushort l1 = 0;
         ushort l2 = 1;
         ushort l3 = 2;
-        
+
         for (int i = 0; i < 64; i++)
         {
             newVerticees[i] = new Vector2(Mathf.Sin(i / 64.0f * 2.0f * Mathf.PI) + 1.0f, Mathf.Cos(i / 64.0f * 2.0f * Mathf.PI) + 1.0f) * 128.0f;
         }
-        
+
         for (int i = 0; i < 62; i++)
         {
             indicees[i * 3] = l1;
             indicees[i * 3 + 1] = l2;
             indicees[i * 3 + 2] = l3;
-        
+
             if (i % 2 == 0)
             {
                 l2 = l1;
@@ -427,6 +414,4 @@ public class PlayerCharacter : MonoBehaviour, IFeedable, IAttackable
 
         rend.sprite.OverrideGeometry(newVerticees, indicees);
     }
-
-    #endregion
 }
